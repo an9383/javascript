@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 기본</title>
+</head>
+<body>
+    <h1>자바스크립트 기본</h1>
+    <h2>자바스크립트의 특징</h2>
+    <ul>
+        <li>웹의 3요소: 구조(HTML), 디자인(CSS), 동작(Javascript/jQuery)</li>
+        <li>브라우저에서 실행되는 세계에서 가장 많이 사용되는 언어</li>
+        <li>자바(백엔드)와 다른 클라이언트(프런트엔드) 언어</li>
+        <li>컴파일 과정이 없는 인터프리터 언어</li>
+        <li>소스가 노출, 원본에 대한 저작권 권리 행사가 힘듦.</li>
+        <li>Pure Script, 순수 스크립트, 바닐라 스크립트</li>
+        <li>라이브러리(jquery 기능을 만들어둠.), 프레임워크(React, Vue, angular... 명령어체계자체를 만듬. 작업환경을 만들어둠.)</li>
+    </ul>
+    <h2>자바스크립 작성방법</h2>
+    <ul>
+        <li>대소문자를 구분</li>
+        <li onclikck="alert()" style="border:1px solid red">인라인 방식 : 요소의 이벤트속성으로 작성하는 방식</li>
+        <li>내부 스크립트: script 태그(요소)로 작성하는 방식
+            <script>
+                //alert("내부 스크립트 입니다.")
+            </script>
+        </li>
+        <li>외부 스크립트: script 태그로 불러오는 방식, 웹표준 권고방식
+            <script src="01.js"></script>
+        </li>
+        <li>내부스크립트 위치는 body 태그 마지막 위치에 적용을 권장</li>
+        <li>큰따옴표(")와 작은 따옴표(')</li>
+        <li>모든 괄호 (),{},[] 열고 닫는 규칙</li>
+        <li>주석: // 한줄주석, 말꼬리주석. /* 여러줄 주석 */ </li>
+    </ul>
+    <h2>변수</h2>
+    <ul>
+        <li>변하는 수/값/데이터/문자/불린값을 담는 공간(메모리)</li>
+        <li>변수의 선언 : var 변수명(변하는 값과 변하지 않는 값 모두 사용가능. 함수단위 블럭설정, 메모리의 블럭단위), let 변수명(변하는 값), const 변수명(변수를 수정할수 없음. 고정값)</li>
+        <li>변수의 데이터유형(형별) : 숫자, 문자, 논리형(블린값), null("아예선언을 안한것"), undefined</li>
+        <li>변수 네이밍 규칙
+            <ul>
+                <li>첫글자는 숫자가 올 수 없다.</li>
+                <li>특수기호/빈칸/한글은 안되고 영문과 숫자의 조합</li>
+                <li>기본적으로 소문자만 사용을 권장(이유있는 경우 제외)</li>
+                <li>의미에 맞는 이름 사용</li>
+                <li>언더바표기법(snakecase): super_man</li>
+                <li>낙타표기법(camelcase): superMan</li>
+                <li>같은 이름으로 중복선언 X, 예약어(특정 명령어, 컴퓨터가 이미 사용하고 있는 단어들)는 사용할 수 없음.</li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </li>
+    </ul>
+<script>
+    var num;  //변수 num을 생성
+    num = 100;  // num이라는 변수에 숫자 100을 입력
+    console.log(num);
+    var num2 = 200; //변수선언 + 값입력
+    console.log(num*num2);
+</script>
+</body>
+</html>
