@@ -31,11 +31,30 @@
         
         //screen
         // 스크린 정보 : 0000px x 0000px (32bit)
-        document.write("스크린 정보 : "+ screen.width+"px X "+screen.height+"px ("+ screen.colorDepth+"bit)");
+        document.write("스크린 정보 : "+ screen.width+"px X "+screen.height+"px ("+ screen.colorDepth+"bit)<br><br>");
 
-        // 스크린 정보 : 0000px x 0000px (32bit)
-        // document.write("")
-        // screen.width 
+        // location
+        document.write(location.href+"<br>"); //전체 주소
+        document.write(location.hash+"<br>"); //해쉬정보
+        document.write(location.host+"<br>"); //호스트정보
+        document.write(location.protocol+"<br>");
+
+        //통신프로토콜
+        //location.href = "https://naver.com";
+
+        // history
+        // history.back(-2); //뒷페이지로
+        // history.forward(); //앞페이지로
+
+        // navigator
+        var os = navigator.userAgent.toLowerCase();
+        if (os.indexOf("window") >= 0) {
+            document.write("<br>윈도우로 접속하였습니다.<br>");
+        } else if(os.indexof("android") >= 0){
+            document.write("<br>안드로이드로 접속하였습니다.<br>"); 
+        } else {
+            document.write("<br>알수없는 OS로 접속하였습니다.<br>"); 
+        }
     </script>
 </body>
 </html>
