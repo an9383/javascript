@@ -16,31 +16,26 @@
     </ul>
 <script>
     // 객체 생성
-    // var tv = new Object(); // 객체생성
-    // tv.size = "100cm"; // tv라는 객체에 size 속성에 100cm라는 값을 대입
-    // //document.write(tv.size);
-    // // 날짜객체
+    var tv = new Object(); // 객체생성
+    tv.size = "100cm"; // tv라는 객체에 size 속성에 100cm라는 값을 대입
+    document.write(tv.size+"<br><br>");
+
+    // 날짜객체
     var today = new Date();
-    // //document.write(today);
-    // //document.write(today+"<br>");   
-    // document.write(today.getFullYear()+"년"); //년도
-    // document.write(" "+(today.getMonth()+1)+"월");   //월
-    // document.write(" "+today.getDate()+"일");
-    // document.write(" "+today.getHours()+"시");
-    // document.write(" "+today.getMinutes()+"분");
-    // // 최종출력: 0000년 00월 00일 00시 00분
+    //document.write(today);
+    //document.write(today+"<br>");   
+    document.write(today.getFullYear()+"년"); //년도
+    document.write(" "+(today.getMonth()+1)+"월");   //월
+    document.write(" "+today.getDate()+"일");
+    document.write(" "+today.getHours()+"시");
+    document.write(" "+today.getMinutes()+"분<br><br>");
+
+    // 최종출력: 0000년 00월 00일 00시 00분
     // document.write(today.getFullYear+"년 "+(today.getMoth()+1)+"월 "+today.getDate()+"일 "+today.getHours()+"시 "+getMinutes()+"분");
     
     
     // 날짜형식 가공
     // 2024-10-6 (일) 오전 10:00
-    // const time = new Date();
-    //now = new Date();
-    // year = today.getFullYear();
-    // month = (today.getMonth())+1;
-    // date = today.getDate();
-    // hour = today.getHours();
-    // min = today.getMinutes();
 
     // var date; // 요일
     // if(today.getDay() == 0) {
@@ -175,13 +170,31 @@
 
     // 정규표현객체, 정규식(RegExp)
     //var id_regExp = new RegExp(/^[a-z]+[a-z0-9]{5,19}$/g);
-    var id_regExp = /^[a-z]+[a-z0-9]{5,19}$/g;
-    var id2 = prompt("아이디");
-    if(id_regExp.test(id2)) {
-        alert("아이디로 사용가능합니다.");
-    } else {
-        alert("아이디형식이 아닙니다.");
-    }
+    // var id_regExp = /^[a-z]+[a-z0-9]{5,19}$/g;
+    // var id2 = prompt("아이디");
+    // if(id_regExp.test(id2)) {
+    //     alert("아이디로 사용가능합니다.");
+    // } else {
+    //     alert("아이디형식이 아닙니다.");
+    // }
+
+    // 문제) 사용자에게 이메일 받아서 이메일이 정확한지?
+    // 이메일 형식이 맞습니다, 이메일 형식이 아닙니다.
+    // var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    // var email = prompt("이메일");
+    // if(!email_regex.test(email_address)){ 
+	// 	alert("이메일형식으로 사용가능합니다.");
+	// }else{
+	// 	alert("올바른이메일형식이 아닙니다.");
+	// }
+       
+	var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    var email = prompt("이메일 주소는?");
+	if(email_regex.test(email)){ 
+		alert("이메일형식으로 사용가능합니다.");
+	}else{
+		alert("올바른이메일형식이 아닙니다.");
+	}
 
 
 </script>
