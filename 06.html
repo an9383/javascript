@@ -13,13 +13,27 @@
 <ul>
     <li>HTML 문서의 구조와 그 정보를 말함</li>
     <li id="txt">document.선택자.명령어/속성</li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>getElementById("txt") : 아이디 선택자</li>
+    <li>getElementsClassName("red")[0] : 클래스 선택자</li>
+    <li>getElementsByTagName("li")[0] : 태그 선택자</li>
+    <li>querySelector("CSS 선택자")</li>
 </ul>
+<button>배경색을 빨간색으로</button>
+<button>글자색을 녹색으로</button>
 <script>
     document.getElementById("txt").style.color = "red";
-    document.getElementById("txt").style.paddingLeft = "20px";
+    document.getElementById("txt").style.paddingLeft = "20px"; //setter
+    var padding = document.getElementById("txt").style.paddingLeft; //getter
+    document.write(padding);
+    document.querySelector("ul li:nth-child(4)").style.border = "1px solid red";
+    document.querySelectorAll("li")[4].style.border = "1px solid red";
+    document.querySelectorAll("button")[0].onclick= function(){
+        document.querySelector("body").style.background = "yellow";
+    };
+    document.querySelectorAll("button")[1].onclick= function(){
+        document.querySelector("body").style.color = "green";
+    };
+
 </script>
 </body>
 </html>
