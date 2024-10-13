@@ -1,60 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOM</title>
 </head>
 <body>
-    <H1>BOM(Browser Object Model)</H1>
-    <ul>
-        <li>브라우저에서 제공하는 객체(기능,정보) 모델</li>
-        <li>window : html 화면영역의 기능과 정보를 제공</li>
-        <li>screen : 모니터의 정보</li>
-        <li>location : 주소창의 정보와 기능</li>
-        <li>history : 방문기록의 기능</li>
-        <li>navigator: 브라우저의 정보제공</li>
-    </ul>
-    <script>
-        // window 객체
-        // window.open() // 팝업창
-        //alert() // 경고창
-        // var out = confirm("정말 탈퇴하시겠습니까?");
-        // document.write(out);
-        // setInterval(function() {
-        //     var today = new Date();
-        //     document.write(today.getSeconds()+"<br>")
-        // },1000) // 반복실행
-        // setTimeout(function(){
-        //     document.write("2초후에 실행됩니다.<br>")
-        // },2000) // 지연실행
-        
-        //screen
-        // 스크린 정보 : 0000px x 0000px (32bit)
-        document.write("스크린 정보 : "+ screen.width+"px X "+screen.height+"px ("+ screen.colorDepth+"bit)<br><br>");
+<h1>BOM(Browser Object Model)</h1>
+<ul>
+    <li>브라우저에서 제공하는 객체(기능, 정보) 모델</li>
+    <li>window : html 화면영역의 기능과 정보를 제공</li>
+    <li>screen : 모니터의 정보</li>
+    <li>location : 주소창의 정보와 기능</li>
+    <li>history : 방문기록의 기동</li>
+    <li>navigator : 브라우저의 정보제공</li>
+</ul>
 
-        // location
-        document.write(location.href+"<br>"); //전체 주소
-        document.write(location.hash+"<br>"); //해쉬정보
-        document.write(location.host+"<br>"); //호스트정보
-        document.write(location.protocol+"<br>");
+<script>
+    // window객체
+    // window.open() // 팝업창
+    // alert() //경고창
+    // var out = confirm("정말 탈퇴하시겠습니까?");
+    // document.write(out);
+    
+    // setInterval(function() {    // 반복실행
+    //     var today = new Date();
+    //     document.write(today.getSeconds()+"<br>");
+    // },1000) 
 
-        //통신프로토콜
-        //location.href = "https://naver.com";
+    // setTimeout(function(){  // 지연실행
+    //     document.write("2초후에 실행됩니다.<br>");
+    // },2000)
 
-        // history
-        // history.back(-2); //뒷페이지로
-        // history.forward(); //앞페이지로
+    // screen(width, height, colorDepth)
+    document.write("스크린 정보 : "+ screen.width+"px x "+screen.height+"px ("+screen.colorDepth+"bit)+<br>")
 
-        // navigator
-        var os = navigator.userAgent.toLowerCase();
-        if (os.indexOf("window") >= 0) {
-            document.write("<br>윈도우로 접속하였습니다.<br>");
-        } else if(os.indexof("android") >= 0){
-            document.write("<br>안드로이드로 접속하였습니다.<br>"); 
-        } else {
-            document.write("<br>알수없는 OS로 접속하였습니다.<br>"); 
-        }
-    </script>
+    // location
+    document.write(location.href + "<br>") // 전체주소
+    document.write(location.hash + "<br>") // 해쉬정보
+    document.write(location.host + "<br>") // 도메인주소
+    document.write(location.protocol + "<br>") // 통신프로토콜
+    // location.href = "https://naver.com";
+
+    // history
+    // history.back(-2);  // 뒷페이지로
+    // history.forward(); // 앞페이지로
+
+    // navigator
+    var os = navigator.userAgent.toLowerCase();
+    // alert(os.indexOf("window"));
+    if(os.indexOf("window") >= 0) {
+        document.write("<br>윈도우로 접속하였습니다.");
+    } else if(os.indexOf("android") >= 0) {
+        document.write("<br>안드로이드로 접속하였습니다.");
+    }
+
+</script>
 </body>
 </html>

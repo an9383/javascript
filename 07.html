@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -117,12 +118,36 @@
         </select></td>
         <td><input type="checkbox"></td>
     </tr>
-</table>
+</table>   
 <button>합계</button>
 <p id="result">0</p>
 
 <script>
-
+    
+    var bt = document.querySelector("button");
+    var total = document.querySelector("#result");
+    var select = document.querySelectorAll("select");
+    var input = document.querySelectorAll("input");
+    bt.onclick = function() {
+        //alert(document.querySelector("#cpu").value);
+        // total.innerText = document.querySelector("#cpu").value;
+        //문제) 모든 가격을 불러와 합산을 출력하기
+        // alert(select[0].value);
+        var price = 0;
+        for(var i=0;i<11;i++) {
+            if(input[i].checked) { // 체크가 되어 있으면
+                price += select[i].value*1;
+            }
+        }
+        total.innerText = price.toLocaleString() + "원";
+    }
+    // 모두선택기능
+    document.querySelectorAll("th")[2].onclick = function() {
+        // 문제) 모든 input이 체크되게
+        for(var i=0;i<11;i++) {
+            input[i].checked = "checked";
+        }
+    }
 </script>
 </body>
 </html>

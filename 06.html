@@ -1,71 +1,76 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
     <style>
-        body {padding-bottom: 200px}
+        body {padding-bottom:200px}
     </style>
 </head>
 <body>
 <h1>DOM(Document Object Model)</h1>
+<h2>자바스크립트 선택자</h2>
 <ul>
     <li>HTML 문서의 구조와 그 정보를 말함</li>
     <li id="txt">document.선택자.명령어/속성</li>
     <li>getElementById("txt") : 아이디 선택자</li>
     <li>getElementsClassName("red")[0] : 클래스 선택자</li>
     <li>getElementsByTagName("li")[0] : 태그 선택자</li>
-    <li>querySelector("CSS 선택자")</li>
+    <li>querySelector("CSS 선택자") : css 선택자로 한개만 선택</li>
+    <li>name 속성값으로 선택</li>
 </ul>
 <h2>주요속성</h2>
 <ul>
-    <li>style: css속성을 가져오거나 변경</li>
-    <li>요소의 속성명: 태그의 속성을 가져오거나 변경</li>
-    <li id="inner">innerText: 글자를 가져오거나 변경</li>
+    <li>style : css 속성을 가져오거나 변경</li>
+    <li>요소의 속성명 : 태그의 속성을 가져오거나 변경</li>
+    <li id="inner">innerText : 글자를 <strong>가져오거나</strong> 변경</li>
     <li>innerHTML : 글자와 태그를 가져오거나 변경</li>
+    <li>value : </li>
 </ul>
-<button id="dd" >배경색을 빨간색으로</button>
+<button>배경색을 빨간색으로</button>
 <button>글자색을 녹색으로</button>
 <button>다크테마</button>
 <button>데이테마</button>
-<input name="day"/>
+<input name="day" id="user" value="이름">
 <script>
-    document.getElementById("txt").style.color = "red";
-    document.getElementById("txt").style.paddingLeft = "20px"; //setter
-    var padding = document.getElementById("txt").style.paddingLeft; //getter
+    document.getElementById("txt").style.paddingLeft = "20px"; // setter
+    var padding = document.getElementById("txt").style.paddingLeft; // getter
+    // alert(padding);
     document.querySelector("ul li:nth-child(4)").style.border = "1px solid red";
     document.querySelectorAll("li")[4].style.border = "1px solid red";
-    document.querySelectorAll("button")[0].onclick= function(){
-        document.querySelector("body").style.background = "yellow";
-    };
-    document.querySelectorAll("button")[1].onclick= function(){
+    document.querySelectorAll("button")[0].onclick = function() {
+        // alert("버튼 누름")
+        document.querySelector("body").style.background = "red";
+    }
+    document.querySelectorAll("button")[1].onclick = function() {
         document.querySelector("body").style.color = "green";
-    };
+    }
     // 과제) 버튼 2개 기능 만들어 오기
-    // var body = document.body;
-    // body.style.background ="red";
-    bt[0].style.background = "green";
+    var body = document.body;
+    var bt = document.querySelectorAll("button");
+    // body.style.background="red";
+    // bt[0].style.background = "green";
     bt[2].onclick = function() {
         body.style.background="#111";
         body.style.color="#eee";
-    };
-    bt[3].onclick = function(){
+    }
+    bt[3].onclick = function() {
         body.style.background="#eee";
         body.style.color="#111";
-    };
-    document.day.style.background="red";
-    document.getElementsByName("day")[0].style.background ="red";
-    document.querySelector("input").id="user_name";
-    //alert(document.querySelector("input").id);
+    }
+    document.getElementsByName("day")[0].style.background="red";
+    document.querySelector("input").id = "user_name";
+    // alert(document.querySelector("input").id);
     // 문제) #inner의 글자를 가져와서 경고창으로 보여주기
-    document.querySelector("#inner").innerText = "<strong>변경된 글</strong>";
-    var txt = document.querySelector("#inner").innerHTML;
-    //alert(txt);
-    // 문제) input의 value값을 'user_name'변경
+    document.querySelector("#inner").innerText = "<strong>변경된 글</strong>"
+    var txt = document.querySelector("#inner").innerText;
+    // alert(txt);
+    // 문제) input의 value 값을 'user_name'변경
     var input = document.querySelector("input");
     input.value = "user_name";
-    // 문제) input의 value값을 경고창으로 나오게
+    // 문제) input의 value 값을 경고창으로 나오게
     alert(input.value);
 </script>
 </body>

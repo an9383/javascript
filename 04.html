@@ -4,199 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>객체(Object)</title>
+    <style>
+        body {padding-bottom:150px;}
+    </style>
 </head>
 <body>
-    <h1>객체(Object)</h1>
-    <ul>
-        <li>기능(Method)과 속성(property)을 가지는 단위</li>
-        <li>객체생성 : new Object();</li>
-        <li>객체.method() : 객체안에 있는 명령어를 실행</li>
-        <li>객체.property : 객체안의 정보를 가져올 때</li>
-        <li>내장객체 : 날짜객체, 숫자객체, 문자객체, 배열객체, 정규표현객체</li>
-    </ul>
+<h1>객체(Object)</h1>
+<ul>
+    <li>기능(Method)과 속성(property)을 가지는 단위</li>
+    <li>객체생성 : new Object();</li>
+    <li>객체.method() : 객체안에 있는 명령어를 실행</li>
+    <li>객체.property : 객체안의 정보를 가져올 때</li>
+    <li>내장객체 : 날짜객체, 숫자객체, 문자객체, 배열객체, 정규표현객체</li>
+</ul>
+<h2>실습예제</h2>
+<ul>
+    <li>객체생성</li>
+    <li>오늘날짜(방문시간)</li>
+    <li>날짜형식 가공</li>
+    <li>기념일 요일 찾기</li>
+    <li>올해 마지막 날은 무슨 요일?</li>
+    <li>디데이(기념일) 구하기</li>
+    <li>문자/숫자 객체에서 자주 사용하는 메서드</li>
+    <li>배열 기본 사용법</li>
+    <li>정규식 기본 활용법</li>
+</ul>
 <script>
-    // 객체 생성
-    var tv = new Object(); // 객체생성
-    tv.size = "100cm"; // tv라는 객체에 size 속성에 100cm라는 값을 대입
-    document.write(tv.size+"<br><br>");
-
+    // 객체생성
+    var tv = new Object();  // 객체생성
+    tv.size = "100cm";  // tv라는 객체에 size 속성에 100cm라는 값을 대입
+    document.write(tv.size+"<br>");
     // 날짜객체
     var today = new Date();
-    //document.write(today);
-    //document.write(today+"<br>");   
-    document.write(today.getFullYear()+"년"); //년도
-    document.write(" "+(today.getMonth()+1)+"월");   //월
-    document.write(" "+today.getDate()+"일");
-    document.write(" "+today.getHours()+"시");
-    document.write(" "+today.getMinutes()+"분<br><br>");
-
-    // 최종출력: 0000년 00월 00일 00시 00분
-    // document.write(today.getFullYear+"년 "+(today.getMoth()+1)+"월 "+today.getDate()+"일 "+today.getHours()+"시 "+getMinutes()+"분");
-    
-    
+    document.write(today+"<br>");
+    document.write(today.getFullYear()+"<br>"); // 년도
+    document.write(today.getMonth()+1+"<br>"); // 월
+    // 최종출력 : 0000년 00월 00일 00시 00분
+    document.write("방문시간 : "+today.getFullYear()+"년 "+(today.getMonth()+1)+"월 "+today.getDate()+"일 "+today.getHours()+"시 "+today.getMinutes()+"분 "+today.getSeconds()+"초<br>")
     // 날짜형식 가공
     // 2024-10-6 (일) 오전 10:00
+    var date; // 요일
+    if(today.getDay()==0) {
+        date = "일";
+    }else if(today.getDay()==1) {
+        date = "월";
+    }else if(today.getDay()==2) {
+        date = "화";
+    }else if(today.getDay()==3) {
+        date = "수";
+    }else if(today.getDay()==4) {
+        date = "목";
+    }else if(today.getDay()==5) {
+        date = "금";
+    }else {
+        date = "토";
+    }
+    var am;
+    if(today.getHours() < 12) {
+        am = "오전"
+    } else {
+        am = "오후"
+    }
+    document.write(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" ("+date+") "+am+" "+today.getHours()+":"+today.getMinutes()+"<br>");
 
-    // var date; // 요일
-    // if(today.getDay() == 0) {
-    //     date = "일";
-    // } else if(today.getDay() == 1) {
-    //     date ="월";
-    // } else if(today.getDay() == 2) {
-    //     date ="화";
-    // } else if(today.getDay() == 3) {
-    //     date ="수";
-    // } else if(today.getDay() == 4) {
-    //     date ="목";
-    // } else if(today.getDay() == 5) {
-    //     date ="금";
-    // } else {
-    //     date ="토";
-    // } 
-    // var ampm;
-    // if(now.getHours() < 12) {
-    // ampm = '오전';
-    // } else {
-    // ampm = '오후';
-    // }
+    // 
+    var last_day = new Date(2024,11,31); // 24년 12월 31일
+    // var last_day = new Date("2024-12-31"); // 24년 12월 31일
+    document.write(last_day.getDay()+"<br>");
+    // 내가 태어난 날은 xx요일입니다.
+    var birth = new Date(2024,1,1);
+    if(birth.getDay()==0) {
+        birth="일";
+    } else if(birth.getDay()==1) {
+        birth="월";
+    }else if(birth.getDay()==2) {
+        birth="화";
+    }else if(birth.getDay()==3) {
+        birth="수";
+    }else if(birth.getDay()==4) {
+        birth="목";
+    }else if(birth.getDay()==5) {
+        birth="금";
+    }else {
+        birth="토";
+    }
+    document.write("내가 태어난 날은 "+birth+"요일입니다.<br>");
+    // 올해 마지막일은 xx요일입니다.
+    var last_day2 = new Date(today.getFullYear(),11,31);
+    document.write(last_day2.getDay()+"<br>");
 
-    // time = "지금은 "+year+"-"+month+"-"+today.getDate()+" ("+today.getDate()+") ";
-    // nowtime = ampm+hour+"시 "+min+"분 입니다.";
-    // document.write(time+nowtime);
-
-    // // 
-    // var last_day = new Date(2024,11,31);
-    // document.write(last_day.getDay()+"<br>");
-    // // 내가 내어난 날은 xx요일입니다.
-    // var birth = new Date(2024,1,1);
-    // if(birth.getDay()==0){
-    //     birth="일";
-    // }
-    // else if(birth.getDay()==0){
-    //     birth="월";
-    // }
-    // else if(birth.getDay()==0){
-    //     birth="화";
-    // }
-    // else if(birth.getDay()==0){
-    //     birth="수";
-    // }
-    // else if(birth.getDay()==0){
-    //     birth="목";
-    // }
-    // else if(birth.getDay()==0){
-    //     birth="금";
-    // }
-    // else{
-    //     birth="토";
-    // }
-    // document.write("내가 태어난 날은"+birth+"요일입니다.")
-
-    // 올해 마지막 날은 무슨요일?
-    //var last_day2 = new Date(today.getFullYear(),11,31);
-    //document.write(last_day2.getDay());
-
+    var last_day2 = new Date(today.getFullYear(),11,31);
+    document.write(last_day2.getDay()+"<br>");
     // 기념일 구하기
-    // 2002년 월드컵이 xx일 지났습니다.
-    // var today = new Date();
-    // var memorial_day = new Date(2002,4,31);
-
-    // var GAP = Math.ceil((today - memorial_day)/(1000 * 3600 * 24));
-    // document.write("월드컵은 "+GAP+"일 지났습니다.<br><br>");
-    // document.write("월드컵은 "+Math.ceil(dday/(1000*3600*24))+"일 지났습니다.<br><br>");
-
-    // 두개의 날짜를 비교하여 차이를 알려준다.
-    // function dateDiff(_date1, _date2) {
-    //     var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
-    //     var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
-
-    //     diffDate_1 = new Date(diffDate_1.getFullYear(), diffDate_1.getMonth()+1, diffDate_1.getDate());
-    //     diffDate_2 = new Date(diffDate_2.getFullYear(), diffDate_2.getMonth()+1, diffDate_2.getDate());
-
-    //     var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
-    //     diff = Math.ceil(diff / (1000 * 3600 * 24));    // 반올림
-    //     return diff+1;
-    //     }
-        
-    //     var a = '2002-05-31';
-        
-    //     document.write('월드컵은 ' + dateDiff(a, new Date()) + '일 지났습니다.<br><br>');
-    //     var today = new Date();
-    //     var world = new Date(2002,4,31);
-    //     var dday = today - world;
-    //     //document.write(dday+"<br>");
-    //     document.write("월드컵은 "+Math.ceil(dday/(1000*3600*24))+"일 지났습니다.<br><br>");
-
-    //     var this_year_last_day = new Date(today.getFullYear(),11,31)
-    //     var dday2 = this_year_last_day - today;
-    //     document.write("올해는 "+ Math.ceil(dday2/(1000*3600*24))+ "일 남았습니다.<br><br>")
-
+    // 2002년 월드컵이 xx일 지났습니다. (2002-5-31)
+    // 현재일 - 기념일
+    var world = new Date(2002,4,31);
+    var dday = today - world;
+    document.write(dday+"<br>"); // ms, 1/1000초 ---> 일수
+    document.write(Math.ceil(dday / (1000*60*60*24))+"일<br>");
+    // 출력) 올해는 xx일 남았습니다.
     // 문자객체 관련 메서드
-    var txt = "Hello world";
+    // var txt = new String("dfdf");
+    var txt = "Hellow world";
     document.write("txt = "+txt+"<br>");
     document.write("글자수 = "+txt.length+"<br>");
     document.write("두번째 글자 = "+txt[1]+"<br>");
     document.write("마지막 글자 = "+txt[txt.length-1]+"<br>");
-    document.write("substring = "+txt.substring(0,6)+"<br>");   // 시작번호, 잘라낼 글자번호
-    document.write("substr = "+txt.substr(0,4)+"<br>");   // 시작번호, 글자갯수
-    document.write("대문자화 = "+txt.toLocaleUpperCase()+"<br>");   // 대문자화
-    document.write("소문자화 = "+txt.toLocaleLowerCase()+"<br>");   // 소문자화
+    document.write("substring = "+txt.substring(0,6)+"<br>"); // 시작번호, 잘라낼 글자번호
+    document.write("substr = "+txt.substr(0,4)+"<br>"); // 시작번호, 글자갯수
+    document.write("대문자화 = "+txt.toLocaleUpperCase()+"<br>"); 
+    document.write("소문자화 = "+txt.toLocaleLowerCase()+"<br>"); 
 
     // 숫자객체
-    //var num = new Number("123");
-    var num = 100.43;
+    // var num = new Number(1113);
+    var num = 100.53;
     var num2 = "100.43px";
-
-    document.write("num = "+num+"<br> num2 = "+num2+"<br>")
-    document.write("정수화(숫자화) : num = "+parseInt(num)+"<br>");
-    document.write("실수화(숫자화) : num = "+parseFloat(num2)+"<br>");
-    document.write("올림 : num = "+Math.ceil(num)+"<br>");
-    document.write("내림 : num = "+Math.floor(num)+"<br>");
-    document.write("반올림 : num = "+Math.round(num)+"<br>");
-    document.write("랜덤 : num = "+(Math.ceil(Math.random()*10))+"<br><br>");
-
+    document.write("num = "+ num+"<br>num2 = "+num2+"<br>");
+    document.write("정수화(숫자화) : num = "+ parseInt(num)+"<br>");
+    document.write("실수화(숫자화) : num2 = "+ parseFloat(num2)+"<br>");
+    document.write("올림 : num = "+ Math.ceil(num)+"<br>");
+    document.write("내림 : num = "+ Math.floor(num)+"<br>");
+    document.write("반올림 : num = "+ Math.round(num)+"<br>");
+    document.write("랜덤수 : "+ Math.ceil(Math.random()*5)+"<br>"); // 랜덤수 1~10 
     // 랜덤수 1~3
-    document.write("랜덤수 1~3 : num = "+(Math.ceil(Math.random()*3))+"<br>");
-    document.write("랜덤수 5~10 : num = "+(Math.ceil(Math.random()*6)+4)+"<br><br>");
+    document.write("랜덤수 : "+ Math.ceil(Math.random()*3)+"<br>");
+    // 랜덤수 5~10
+    document.write("랜덤수 : "+ (Math.ceil(Math.random()*6)+4)+"<br>");
 
     // 배열
-    // var arr = new Array("내용","내용2",100,true);
-    var arr = ["가위","바위","보"];
-    document.write("랜덤값 : "+arr[Math.floor(Math.random()*3)]+"<br><br>");
-
-    // 
+    // var arr = new Array("내용","내용2", 100, true);
+    var arr = ["가위","바위", "보"];
+    document.write(arr[0] + "<br>");
+    document.write("랜덤값 : "+arr[Math.floor(Math.random()*3)] + "<br>");
     var yoil = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
-    document.write("오늘은 "+yoil[today.getDay()]+"입니다.<br><br>")
+    document.write("오늘은 "+yoil[today.getDay()]+"입니다.");
 
     // 정규표현객체, 정규식(RegExp)
-    //var id_regExp = new RegExp(/^[a-z]+[a-z0-9]{5,19}$/g);
+    // var id_redExp = new RegExp("^[a-z]+[a-z0-9]{5,19}$");
     // var id_regExp = /^[a-z]+[a-z0-9]{5,19}$/g;
     // var id2 = prompt("아이디");
     // if(id_regExp.test(id2)) {
-    //     alert("아이디로 사용가능합니다.");
-    // } else {
-    //     alert("아이디형식이 아닙니다.");
+    //     alert("아이디로 사용가능합니다.")
+    // } else { 
+    //     alert("아이디형식이 아닙니다.")
     // }
-
     // 문제) 사용자에게 이메일 받아서 이메일이 정확한지?
     // 이메일 형식이 맞습니다, 이메일 형식이 아닙니다.
-    // var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-    // var email = prompt("이메일");
-    // if(!email_regex.test(email_address)){ 
-	// 	alert("이메일형식으로 사용가능합니다.");
-	// }else{
-	// 	alert("올바른이메일형식이 아닙니다.");
-	// }
-       
-	var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     var email = prompt("이메일 주소는?");
-	if(email_regex.test(email)){ 
-		alert("이메일형식으로 사용가능합니다.");
-	}else{
-		alert("올바른이메일형식이 아닙니다.");
-	}
-
-
+    if(email_regex.test(email)) {
+        alert("이메일 형식이 맞습니다");
+    } else {
+        alert("이메일 형식이 아닙니다");
+    }
 </script>
 </body>
 </html>
