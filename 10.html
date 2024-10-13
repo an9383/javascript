@@ -4,8 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트 객체</title>
+    <style>
+        #stage {border:1px dashed gray; width:400px; height:400px; position: relative;}
+        #stage img {display: block; position: absolute; width:100px; height:100px; object-fit: contain; left:0; top:0;}
+    </style>
 </head>
 <body>
+<h1>이벤트 객체</h1>
+<p>이벤트 객체란 이벤트가 가기고 있는 기능(Method)이나 정보속성(Property)</p>
+<h2>키보드 이벤트 객체속성</h2>
+<ul>
+    <li>key : 키 이름값을 반환</li>
+    <li>keyCode : 키보드의 키 코드값을 반환</li>
+    <li>ctrlKey</li>
+    <li>altKey</li>
+    <li>shiftKey</li>
+</ul>
+<h2>마우스 이벤트 객체속성</h2>
+<ul>
+    <li>clientX / clientY : 마우스의 화면좌표값(고정)좌표값</li>
+    <li>pageX / pageY : 마우스의 도큐먼트(body)의 좌표값</li>
+    <li>screenX / screenY : 모니터의 화면좌표</li>
+    <li>offsetX / offsetY : 선택자 영역의 좌표값</li>
+</ul>
+<div id="stage" style="width:80%">
+    <img src="img/car.png" alt="">
+</div>
+<script>
+    var x = 0, y = 0; // 자동차의 좌표값
+    //var x_max = document.querySelector("#stage");
+    var stage = document.querySelector
+    var car = document.querySelector("#stage img"); // stage안에 있는 img
+
+    document.onkeydown = function(e){
+        console.log(e.key);
+        console.log(e.keyCode);
+        if(e.keyCode == 13){
+        alert("엔터키 눌렀네~~ ㅋㅋㅋ");
+        }
+        // // 문제) F12누르면 경고창에 "개발자도구로 뭐할라곸"
+        // else if(e.keyCode == 123) {
+        //     alert("개발자도구로 뭐할라곸");
+        //     return false;   // 이후에 하는 행동을 멈추겠다. 
+        // }
+        // Ctrl + p 단축키
+        else if(e.ctrlKey == true && e.keyCode == 80){
+            alert("출력방지");
+            return false;
+        }
+        // 문제) 오른쪽 키 누르면 자동차가 10px 오른쪽으로 가게
+        else if(e.keyCode == 39 && x < 500){
+            x += 10;
+            car.style.left = x +"px";
+            car.style.rotate = "0deg";
+        }
+        else if(e.keyCode == 37 && x > 0){
+            x -= 10;
+            car.style.left = x +"px";
+            car.style.rotate = "180deg";
+        }
+        else if(e.keyCode == 40 && y < 300){
+            y += 10;
+            car.style.top = y +"px";
+            car.style.rotate = "90deg";
+        }
+        else if(e.keyCode == 38 && y > 0){
+            y -= 10;
+            car.style.top = y +"px";
+            car.style.rotate= "270deg";
+        }
+
+    }
+    document.onclick = function(e){
+        //alert();
+        console.log(e.clientX + ", "+e.clientY);
+        //console.log(e.pageX + ", "+e.pageY);
+    }
+    // 문제) 오른쪽 키 누르면 자동차가 10px 오른쪽으로 가게
+    // document.onkeydown = function(e){
+
+    // }
     
+</script>
 </body>
 </html>
