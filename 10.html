@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트 객체</title>
     <style>
-        #stage {border:1px dashed gray; width:400px; height:400px; position: relative;}
+        #stage {border:1px dashed gray; width:80%; height:400px; position: relative; }
         #stage img {display: block; position: absolute; width:100px; height:100px; object-fit: contain; left:0; top:0;}
+        .cursor { position: fixed; left:0; top:0; width:80px; margin}
     </style>
 </head>
 <body>
@@ -27,14 +28,17 @@
     <li>screenX / screenY : 모니터의 화면좌표</li>
     <li>offsetX / offsetY : 선택자 영역의 좌표값</li>
 </ul>
-<div id="stage" style="width:80%">
+<div id="stage">
     <img src="img/car.png" alt="">
 </div>
+<img src="img/cursor.png" alt="" />
 <script>
     var x = 0, y = 0; // 자동차의 좌표값
-    //var x_max = document.querySelector("#stage");
-    var stage = document.querySelector
+    var stage =document.querySelector("#stage");
     var car = document.querySelector("#stage img"); // stage안에 있는 img
+    var x_max = parseFloat(getComputedStyle(stage).width) - parseFloat(getComputedStyle(car).width);
+    var y_max = parseFloat(getComputedStyle(stage).height) - parseFloat(getComputedStyle(car).height);
+       //getComputedStyle(선택자).속성
 
     document.onkeydown = function(e){
         console.log(e.key);
@@ -53,7 +57,7 @@
             return false;
         }
         // 문제) 오른쪽 키 누르면 자동차가 10px 오른쪽으로 가게
-        else if(e.keyCode == 39 && x < 500){
+        else if(e.keyCode == 39 && x < x_max){
             x += 10;
             car.style.left = x +"px";
             car.style.rotate = "0deg";
@@ -63,7 +67,7 @@
             car.style.left = x +"px";
             car.style.rotate = "180deg";
         }
-        else if(e.keyCode == 40 && y < 300){
+        else if(e.keyCode == 40 && y < y_max){
             y += 10;
             car.style.top = y +"px";
             car.style.rotate = "90deg";
@@ -76,14 +80,11 @@
 
     }
     document.onclick = function(e){
-        //alert();
         console.log(e.clientX + ", "+e.clientY);
-        //console.log(e.pageX + ", "+e.pageY);
     }
-    // 문제) 오른쪽 키 누르면 자동차가 10px 오른쪽으로 가게
-    // document.onkeydown = function(e){
-
-    // }
+    document.onmousemove = function() {
+        // 과제) 현재 마우스의 좌표(e.clientX/Y)를 cursor이미지의 좌표(left,top)로 적용
+    }
     
 </script>
 </body>
