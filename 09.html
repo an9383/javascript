@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트(Event)</title>
+</head>
+<body>
+<h1>이벤트(Event)</h1>
+<ul>
+    <li>이벤트란 방문자가 입장이후의 모든 움직임(상호작용, 인터렉션)을 말함</li>
+    <li>onclick : 클릭</li>
+    <li>ondbclick : 더블클릭</li>
+    <li>onmouseover : 마우스가 올려졌을 때</li>
+    <li>ommouseout : 마우스가 벗어났을 때</li>
+    <li>onmousemove : 마우스가 움직일 때</li>
+    <li>onfocus : 포커스를 얻었을 때</li>
+    <li>onblur : 포커스를 잃었을 때</li>
+    <li>onkeypress : 키를 눌렀을 때, 특수키 안됨, 대소문자를 구분</li>
+    <li>onkeydown : 키를 눌렀을 때, 특수키 가능, 대문자로만 인식, 대부분 keydonw사용</li>
+    <li>onkeyup : 키를 떼었을 때</li>
+    <li>onchange : value값이 변경되었을 때</li>
+    <li>onload : 하위요소가 모두 로딩되었을 때</li>
+    <li>onresize : window/document의 사이즈가 변경되었을 때</li>
+    <li>onsubmit : 폼태그안에 전송기능이 작동될 때</li>
+    <li>onreset : 폼태그안에 있는 취소기능이 작동될 때</li>
+    <li>this 키워드 : 이벤트 발생한 요소를 가르키는 키워드</li>
+    <li>return 키워드 : 값을 반환</li>
+</ul>
+<input type="color"> <button>글자색</button> 
+<input type="range" min="8" max="30">
+<script>
+    // 문제) 글자색 버튼을 클릭하면 사용자가 지정한 색으로 글자색이 적용되게
+    var bt = document.querySelectorAll("button"); // button태그지정
+    var input = document.querySelectorAll("input");
+    var body = document.body;
+    var li = document.querySelectorAll("li"); 
+    bt[0].onclick = function() {
+        body.style.color = input[0].value;
+    }
+    bt[0].ondbclick = function() {
+        alert("더블클릭 함.");
+    }
+    // 문제) 4번재 li에 마우스 올리면 4번째 li 배경색이 녹색으로
+    li[3].onmouseover = function(){
+        this.style.background = "green";
+    }
+    li[3].onmouseout = function(){
+        this.style.background = "";
+    }
+    // 문제) 색상input이 활성화되었을 때 경고창: 색상을 선택해주세요~
+    // input[0].onfocus = function(){
+    //     alert("색상을 선택해주세요.");
+    // }
+    document.onkeypress = function(){
+        alert("키누름");
+    }
+    // 문제) 색상을 변경하면 바로 색상 적용되게
+    input[0].onchange = function(){
+        body.style.color = input[0].value;
+    }
+    // 문제) 글자크기가 바로 적용되게
+    input[1].onchange = function(){
+        body.style.fontSize = input[1].value + "px";
+    }
+    
+</script>
+</body>
+</html>
