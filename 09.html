@@ -26,8 +26,10 @@
     <li>onreset : 폼태그안에 있는 취소기능이 작동될 때</li>
     <li>this 키워드 : 이벤트 발생한 요소를 가르키는 키워드</li>
     <li>return 키워드 : 값을 반환</li>
+    <li>addEventListener : 이벤트 중첩, 다중이벤트, 동적요소에 적용하고자 할때</li>
+    <li></li>
 </ul>
-<input type="color"> <button>글자색</button> 
+<input type="color"> <button>글자색</button>
 <input type="range" min="8" max="30">
 <script>
     // 문제) 글자색 버튼을 클릭하면 사용자가 지정한 색으로 글자색이 적용되게
@@ -63,7 +65,18 @@
     input[1].onchange = function(){
         body.style.fontSize = input[1].value + "px";
     }
-    
+    function plus (num, num2) {
+        return num + num2;
+    }
+    // alert(plus(10,10))
+    li[19].innerHTML = "<button>나는 동적요소</button>";
+    li[19].addEventListener("click",function(e){
+        //alert(e);
+        console.log(e.target.tagName);  //e.target이 누른 요소(태그)
+        if(e.target.tagName == "BUTTON") {
+            alert("동적요소 클릭함");
+        }
+    })
 </script>
 </body>
 </html>
