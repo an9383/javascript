@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 예제 - 견적서</title>
+    <style>
+        table {border-collapse: collapse; display: block; margin:auto}
+        td,th {border:1px solid #ccc;border-left:none; padding:2px 10px;}
+        th {background:#eee}
+        td:last-child, th:last-child {border-right:none; text-align: center;}
+        button {font-size:20px; font-weight: bold; padding:10px 50px; cursor: pointer;margin:50px 0 0;}
+        #result {color:orangered; font-weight: bold; font-size:30px;}
+    </style>
+</head>
+<body>
+<h1>조립PC 견적서</h1> 
+<table>
+    <tr>
+        <th>분류</th>
+        <th>상품명</th>
+        <th>선택</th>
+    </tr>
+    <tr>
+        <th>CPU</th>
+        <td>
+            <select id="cpu">
+                <option value="30000">AMD 라이젠3 PRO 4350G (르누아르) (멀티팩(정품))</option>
+                <option value="40000">AMD 라이젠5-3세대 4600G (르누아르) (멀티팩(정품))</opetion>
+                <option value="50000">AMD 라이젠5 PRO 4650G (르누아르) (멀티팩(정품))</option>
+            </select>
+        </td>
+        <td><input type="checkbox" checked></td>
+    </tr>
+    <tr>
+        <th>쿨러</th>
+        <td><select id="cooler">
+            <option value="10000">CPU 기본 쿨러 장착 (추가선택가능)</option>
+            <option value="20000">얼티메이크 EPIC 120 PLUS ARGB WHITE</opetion>
+            <option value="30000">잘만 CNPS9X OPTIMA WHITE LED</option>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>메인보드</th>
+        <td><select id="mboard">
+            <option value="50000">ASUS PRIME A520M-K 대원씨티에스</option>
+            <option value="80000">ASUS PRIME A520M-K 대원씨티에스</opetion>
+            <option value="100000">ASUS PRIME B550M-A 대원씨티에스</option>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>메모리</th>
+        <td><select id="memory">
+            <option value="50000">[8G / 4G X 2] GeIL DDR4-2666 CL19 PRISTINE (4GB)</option>
+            <option value="100000">[16G / 8G X 2] GeIL DDR4-2666 CL19 PRISTINE (8GB)</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>그래픽카드</th>
+        <td><select id="vga">
+            <option value="100000">메인보드 내장 기본 VGA 사용 (추가선택가능)</option>
+            <option value="150000">GAINWARD 지포스 GT1030 D4 2GB 디앤디컴</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>SSD</th>
+        <td><select id="ssd">
+            <option value="200000">BIOSTAR S100 Series (240GB)</option>
+            <option value="150000">BIOSTAR S100 Series (120GB)</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>HDD</th>
+        <td><select id="hdd">
+            <option value="200000">Seagate BarraCuda 7200/256M (ST2000DM008, 2TB)</option>
+            <option value="250000">Seagate BarraCuda 5400/256M (ST4000DM004, 4TB)</opetion>
+            <option value="350000">Seagate BarraCuda 5400/256M (ST8000DM004, 8TB)</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>케이스</th>
+        <td><select id="case1">
+            <option value="200000">마이크로닉스 COOLMAX HAMMER</option>
+            <option value="250000">마이크로닉스 COOLMAX HAMMER II</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>파워</th>
+        <td><select id="power">
+            <option value="200000">COX SECURE SC-500N</option>
+            <option value="250000">COX SECURE SC-600N</opetion>
+            <option value="350000">COX SECURE SC-700N</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>운영체제</th>
+        <td><select id="os">
+            <option value="0">별도구매</option>
+            <option value="150000">Microsoft Windows 10 Home (DSP 64bit 한글)</opetion>
+            <option value="250000">Microsoft Windows 11 Pro (DSP 64bit 한글)</opetion>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr>
+        <th>조립비</th>
+        <td><select id="basic">
+            <option value="0">기본조립 + 2년 전국 무상 방문 출장AS (1대분)</option>
+        </select></td>
+        <td><input type="checkbox"></td>
+    </tr>
+</table>
+<button>합계</button>
+<p id="result">0</p>
+
+<script>
+
+</script>
+</body>
+</html>
