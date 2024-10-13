@@ -37,13 +37,13 @@
     var bt = document.querySelectorAll("button");
     bt[0].onclick = function() {
         var bg = bt[0].innerText;
-        document.body.style.background = bg; 
+        document.body.style.background = bg;
     }
 
     // 문제) 두번째 버튼을 누르면 input의 value값을 가져와 배경색으로 적용
     bt[1].onclick = function() {
         var bg = document.querySelector("input").value;
-        document.body.style.background = bg; 
+        document.body.style.background = bg;
     }
 
 </script>
