@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>돔조작에 유용한 함수 및 이벤트</title>
+</head>
+<body>
+<h1>DOM 조작에 유용한 함수 및 이벤트</h1>
+<ul>
+    <li>forEach()</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    // forEach()
+    const li = document.querySelectorAll('li');
+    // 기본형
+    li[0].style.border = '1px solid red'; 
+
+    // 반복문형
+    for(var i=0; i<li.length; i++){
+        li[i].style.border = '1px solid red';  // li[i] == item
+        console.log(li[i].textContent);  // li[i].textContent == item.textContent
+    }
+
+    li.forEach((item, index) => {
+        console.log(index + 1, item.textContent);
+    });
+
+    // addEventListener()
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+        console.log('Button clicked');
+    });
+
+    // removeEventListener()
+    button.removeEventListener('click', () => {
+        console.log('Button clicked');
+    });
+
+    // getElementsByClassName()
+    const items = document.getElementsByClassName('item');
+    console.log(items);
+
+    // querySelectorAll()
+    const links = document.querySelectorAll('a');
+    console.log(links);
+
+    // getElementById()
+    const container = document.getElementById('container');
+    console.log(container);
+
+    // createElement()
+    const newItem = document.createElement('li');
+    newItem.textContent = 'New Item';
+    
+</script>
+</body>
+</html>

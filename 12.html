@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디자인(화면) 조작하기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+       * {margin:0; padding:0; list-style:none;}
+              h1 {text-align: center; padding:30px}
+              nav ul {border: 1px dashed gray; padding:10px 20px; display:flex; flex-wrap: wrap; align-items: 
+                center; gap:10px 20px; justify-content: center; width: fit-content; margin: auto;}
+              nav i {color:#ddd;}
+              nav i:nth-of-type(1) {color:#000;}
+              nav button {padding:2px 7px}
+              nav input[type=color] {border:none; background:none;}
+              main {padding:50px; max-width:600px; margin:auto;}
+              main h2 {padding:50px 0;}
+              main p {margin-bottom:20px;}</style>
+</head>
+<body>
+<h1>디자인(화면) 조작하기</h1>
+<nav>
+    <ul>
+        <li>배경색 <input type="color" value="#ffffff"></li>
+        <li>글자색 <input type="color" value="#000000"></li>
+        <li>글자크기 <input type="range" min="11" max="60" value="16" ></li>
+        <li><button>다크모드</button></li>
+        <li><button>초기화</button></li>
+        <li>
+            <i class="fa-solid fa-align-left"></i>
+            <i class="fa-solid fa-align-center"></i>
+            <i class="fa-solid fa-align-right"></i>
+        </li>
+    </ul>
+</nav>
+<main>
+    <h2>온기</h2>
+    <p>노래 : 임영웅</p>
+    <p>노래 한곡 한곡 따뜻한 주제가 돋보이는 아름다운 한글가사의 노래를 모아봤어요.</p>
+        <p>바삐 돌아가는 하루에 빠른비트의 음악들도 좋지만. 가끔은 그 옛날 연필로 가사 하나하나 마음담아 꾹꾹 써내려나간 것 같은 시집같은 노래들을 들으며 #힐링 이 될때가 있어요.</p>
+        <p>어지러운 가사와 멜로디를 잠시 내려놓고 마음을 눌러쓴 가사에 귀를 기울여 보세요. 한마디 한마디 진심어린 단어의 울림에 근심과 걱정들이 파도에 실려 사라질 거 예요.</p>
+        <p>사랑하는 #부모님 과. 사랑하는 아이와. 시집같이 아름다운 노래들로 어여쁜 #추억 을 만들어 보세요.</p>
+</main>
+<script>
+    // UI 기능들 제작
+    // 변수 설정
+    var bt = document.querySelectorAll("button");
+    var input = document.querySelectorAll("input");
+    var i_tag = document.querySelectorAll(".fa-solid");
+    var main = document.querySelector("main");
+    // 배경색 버튼
+    input[0].onchange = function() {
+        main.style.background = this.value;
+    }
+    // 글자색 변경
+    input[1].onchange = function() {
+        main.style.color = this.value;
+    }
+    // 글자크기
+    input[2].onchange = function(){
+        main.style.fontSize = this.value+"px";
+    }
+    // 다크모드
+    bt[0].onclick = function() {
+        main.style.color = "#ffffff";
+        main.style.background = "#000";
+    }
+    // 초기화
+    bt[1].onclick = function() {
+        // main.style.color = "";
+        // main.style.background = "";
+        // main.style.fontSize = "";
+        main.style = "";
+    }
+    
+
+</script>
+</body>
+</html>
