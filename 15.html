@@ -48,7 +48,7 @@
     var ul = document.querySelector("ul");
     var span = document.querySelectorAll("span");
     var bt = document.querySelectorAll("button");
-    var page = 1;
+    var page = 0;
     // span[1].onclick = function(){
     //     ul.style.marginLeft = -450*1 + "px";
     // }
@@ -63,20 +63,27 @@
             span[index].classList.add('on');
         };
     })
-    
+
     // 다음(왼쪽으로 이동) 버튼
     bt[1].onclick = function() {
-        ul.style.marginLeft = -450 * page + "px"; 
-        if(page == 5) page = 0;
-        else page++;
+        if(page < span.length-1) {
+            ul.style.marginLeft = -450 * page + "px";
+            page++;
+        }
     }
 
     // 다음(왼쪽으로 이동) 버튼
     bt[0].onclick = function() {
-        ul.style.marginLeft = 450 * page + "px"; 
-        if(page == 0) page = 5;
-        else page--;
+            
+        if(page > 0) {
+            page--;
+            ul.style.marginLeft = -450 * page + "px";
+        } else {
+            page = 5;
+        }
     }
+
+    // 과제 ) 이전/ 다음기능을 비활성화 하세요.
 
 
 </script>
