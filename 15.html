@@ -4,8 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    <style>
+        
+        * {margin:0; padding:0; list-style:none;}
+              h1 {text-align: center; padding:20px}
+              h2 {display: none;}#slide {overflow: hidden;width:450px; margin:auto;}#slide 
+              ul {display: flex; width:fit-content; transition:ease all .3s}#slide 
+              img {display:block;width:450px; height:450px; object-fit: cover;}.page {display: flex; gap:20px; justify-content: center; margin-top:30px}.page 
+              span {width:20px; height:20px; background:#eee; border-radius: 50px; cursor: pointer; transition: ease all .3s;}.page 
+              span:hover {background:#000;}.page 
+              span.on {width:40px;background:#000;}
+              #bt {border:1px solid red; margin:20px 0; display: flex; justify-content: space-between;}
+              #bt button {padding: 5px 10px;}
+    </style>
+    </head>
+
 <body>
+    <section id="slide">
+        <h2>작품리스트</h2>
+        <ul>
+            <li><img src="img/3d1.png"></li>
+            <li><img src="img/3d2.png"></li>
+            <li><img src="img/3d3.png"></li>
+            <li><img src="img/3d4.png"></li>
+            <li><img src="img/3d5.png"></li>
+            <li><img src="img/3d6.png"></li>
+        </ul>
+        <div class="page">
+            <span class="on"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="bt">
+            <button>이전</button>
+            <button>다음</button>
+        </div>
+    </section>
+<script>
+    // 문제) 두번째 span을 클릭하면 ul을 움직여서 두번째 이미지가 보이도록 ul을 움직이도록
+    var ul = document.querySelector("ul");
+    var span = document.querySelectorAll("span");
+    var bt = document.querySelectorAll("button");
+    var page = 1;
+    // span[1].onclick = function(){
+    //     ul.style.marginLeft = -450*1 + "px";
+    // }
+
+    // 페이지네이션 버튼 기능
+    span.forEach(function(tag, index) {
+        tag.onclick = function() {
+            ul.style.marginLeft = -450*index + "px"; 
+            // 현재위치 표현
+            document.querySelector(".on").classList.remove('on');
+            //this.classList.add('on');
+            span[index].classList.add('on');
+        };
+    })
     
+    // 다음(왼쪽으로 이동) 버튼
+    bt[1].onclick = function() {
+        ul.style.marginLeft = -450 * page + "px"; 
+        if(page == 5) page = 0;
+        else page++;
+    }
+
+    // 다음(왼쪽으로 이동) 버튼
+    bt[0].onclick = function() {
+        ul.style.marginLeft = 450 * page + "px"; 
+        if(page == 0) page = 5;
+        else page--;
+    }
+
+
+</script>
 </body>
 </html>
