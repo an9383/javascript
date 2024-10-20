@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지역변수/전역변수</title>
+</head>
+<body>
+<h1>지역변수 / 전역변수</h1>
+<ul>
+    <li>전역변수 : 변수(var, let, const)를 스코프 밖에서 선언</li>
+    <li>지역변수 : 스코프 안에서 선언한 변수</li>
+    <li>같은 이름의 지역, 전역변수를 스코프안에서 사용시 지역변수 우선시 됨.</li>
+    <li>스코프 유형 : 함수(function(){})와 기타(if, for...)</li>
+    <li>var는 함수형 안에서는 지역변수 인식</li>
+    <li>let, const는 모든 스코프에서 지역변수 인식</li>
+    <li>스코프 안에서 변수 선언은 다른 코드보다 우선 실행됨(호이스팅)</li>
+</ul>
+<script>
+    var num = 100;
+    console.log(num);
+    function plus() {
+        //var num = 200; // 지역변수
+        //var num = num;
+        console.log("지역변수 num : "+num);
+        var num = 200; 
+    }
+    plus();
+    console.log(num);
+    if (true) {
+        var num = 300;
+    }
+    console.log(num);   // 300으로 나옴.
+</script>
+</body>
+</html>

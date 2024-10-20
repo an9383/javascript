@@ -73,6 +73,25 @@
         // main.style.fontSize = "";
         main.style = "";
     }
+    // 정렬
+    i_tag[0].onclick = function(){
+        main.style.textAlign = "left";
+        i_set(0); 
+    }
+    i_tag[1].onclick = function(){
+        main.style.textAlign = "center";
+        i_set(1);
+    }
+    i_tag[2].onclick = function(){
+        main.style.textAlign = "right";
+        i_set(2);
+    }
+    function i_set(now){
+        i_tag[0].style.color = "#ccc";
+        i_tag[1].style.color = "#ccc";
+        i_tag[2].style.color = "#ccc";
+        i_tag[now].style.color = "#000000";
+    }
     
 
 </script>

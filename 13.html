@@ -4,61 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>돔조작에 유용한 함수 및 이벤트</title>
+    <style>
+        body {height:500vh;}
+        .on{background:red; color:#fff; border:2px solid darkred;}
+        .fix{position: fixed; right:50px; bottom: 50px;}
+    </style>
 </head>
 <body>
 <h1>DOM 조작에 유용한 함수 및 이벤트</h1>
 <ul>
-    <li>forEach()</li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>forEach() : 선택자(태그)의 갯수만큼 반복할 때</li>
+    <li>classList.add() : 클래스 추가 <button>강조</button></li>
+    <li>classList.remove() : 클래스 삭제  <button>강조제거</button></li>
+    <li>classList.toggle() : 클래스 토글 <button>강조하기</button></li>
+    <li>classList.contains() : 클래스 유무를 검사(true/false) <button>on 클래스 검사</button></li>
+    <li>remove() : 요소를 삭제 <button>클릭하면 저는 사라짐~</button></li>
+    <li>insertAdjacentHTML() : 요소를 삽입(추가) <button>맨앞에 추가</button> <button>맨뒤에 추가</button> </li>
+    <li>window.scrollTo() : 스크롤 이동 <button>특정 위치로 이동</button> <button class="fix">맨위로</button></li>
+    <li>window.scrollY / window.scrollX : 스크롤값 얻기</li>
+    <li>window.getComputedStyle(선택자).css속성 : 선택자의 렌더링된 스타일값을 가져올 때</li>
 </ul>
 <script>
     // forEach()
     const li = document.querySelectorAll('li');
+    var bt = document.querySelectorAll('button');
+    var ul = document.querySelector('ul');
+
     // 기본형
-    li[0].style.border = '1px solid red'; 
+    // li[0].style.border = '1px solid red';
+    // li[1].style.border = '1px solid red';
+    // li[2].style.border = '1px solid red';
+    // li[3].style.border = '1px solid red';
+    // li[4].style.border = '1px solid red';
+    // li[5].style.border = '1px solid red';
+    // li[6].style.border = '1px solid red';
 
-    // 반복문형
-    for(var i=0; i<li.length; i++){
-        li[i].style.border = '1px solid red';  // li[i] == item
-        console.log(li[i].textContent);  // li[i].textContent == item.textContent
-    }
+    // 반복문형 
+    // for(var i=0; i<7; i++){
+    //     li[i].style.border = '1px solid red';
+    // }
 
-    li.forEach((item, index) => {
-        console.log(index + 1, item.textContent);
-    });
-
-    // addEventListener()
-    const button = document.querySelector('button');
-    button.addEventListener('click', () => {
-        console.log('Button clicked');
-    });
-
-    // removeEventListener()
-    button.removeEventListener('click', () => {
-        console.log('Button clicked');
-    });
-
-    // getElementsByClassName()
-    const items = document.getElementsByClassName('item');
-    console.log(items);
-
-    // querySelectorAll()
-    const links = document.querySelectorAll('a');
-    console.log(links);
-
-    // getElementById()
-    const container = document.getElementById('container');
-    console.log(container);
-
-    // createElement()
-    const newItem = document.createElement('li');
-    newItem.textContent = 'New Item';
+    // forEach()형
+    // li.forEach(function(tag, i) {    // 대상(태그), 인덱스값
+    //     console.log("실행됨"+i);
+    //     tag.style.background = "orange";
+    //     tag.innerText = i+1;
+    // });
     
-</script>
+    // 클래스 추가
+    bt[0].onclick = function() {
+        li[1].classList.add('on');  
+        }
+    // 클래스 제거
+    bt[1].onclick = function() {
+        li[1].classList.remove('on');  
+        }
+    // 클래스 토글
+    bt[2].onclick = function() {
+        var chk = li[1].classList.contains('on');
+        if(chk == true) {
+            this.innerText = "강조제거";
+        } else {
+            this.innerText = "강조하기";
+        }
+        this.classList.toggle('on');
+        }
+    // 클래스 유무 검사
+    bt[3].onclick = function() {
+        alert(li[1].classList.contains('on'));
+        }
+    // 삭제 버튼
+    bt[4].onclick = function() {
+        this.remove();  // 요소 자체를 삭제시킴
+        }
+    // 앞에 추가
+    bt[5].onclick = function() {
+        ul.insertAdjacentHTML('afterbegin', '<li>추가내용</li>');
+        }
+    // 앞에 추가
+    bt[6].onclick = function() {
+        ul.insertAdjacentHTML('beforeend', '<li>추가내용2</li>');
+        }
+    // 스크롤 이동
+    bt[7].onclick = function() {
+        window.scrollTo({left:0,top:3000,behavior:"smooth"});
+        }
+    // 맨위로
+    bt[8].onclick = function() {
+        window.scrollTo({left:0,top:0,behavior:"smooth"});
+        }
+    //실제 렌더링된 스타일 속성값 얻기
+    alert(window.getComputedStyle(document.body).height);   
+    </script>
 </body>
 </html>
