@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>디자인(화면) 조작하기</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-       * {margin:0; padding:0; list-style:none;}
-              h1 {text-align: center; padding:30px}
-              nav ul {border: 1px dashed gray; padding:10px 20px; display:flex; flex-wrap: wrap; align-items: 
-                center; gap:10px 20px; justify-content: center; width: fit-content; margin: auto;}
-              nav i {color:#ddd;}
-              nav i:nth-of-type(1) {color:#000;}
-              nav button {padding:2px 7px}
-              nav input[type=color] {border:none; background:none;}
-              main {padding:50px; max-width:600px; margin:auto;}
-              main h2 {padding:50px 0;}
-              main p {margin-bottom:20px;}</style>
+        * {margin:0; padding:0; list-style:none;}
+        h1 {text-align: center; padding:30px}
+        nav ul {border: 1px dashed gray; padding:10px 20px; display:flex; flex-wrap: wrap; align-items: center; gap:10px 20px; justify-content: center; width: fit-content; margin:auto;}
+        nav i {color:#ddd;}
+        nav i:nth-of-type(1) {color:#000;}
+        nav button {padding:2px 7px}
+        nav input[type=color] {border:none; background:none;}
+        main {padding:50px; max-width:600px; margin:auto;}
+        main h2 {padding:50px 0;}
+        main p {margin-bottom:20px;}
+    </style>
 </head>
 <body>
 <h1>디자인(화면) 조작하기</h1>
@@ -37,63 +37,102 @@
 <main>
     <h2>온기</h2>
     <p>노래 : 임영웅</p>
-    <p>노래 한곡 한곡 따뜻한 주제가 돋보이는 아름다운 한글가사의 노래를 모아봤어요.</p>
-        <p>바삐 돌아가는 하루에 빠른비트의 음악들도 좋지만. 가끔은 그 옛날 연필로 가사 하나하나 마음담아 꾹꾹 써내려나간 것 같은 시집같은 노래들을 들으며 #힐링 이 될때가 있어요.</p>
-        <p>어지러운 가사와 멜로디를 잠시 내려놓고 마음을 눌러쓴 가사에 귀를 기울여 보세요. 한마디 한마디 진심어린 단어의 울림에 근심과 걱정들이 파도에 실려 사라질 거 예요.</p>
-        <p>사랑하는 #부모님 과. 사랑하는 아이와. 시집같이 아름다운 노래들로 어여쁜 #추억 을 만들어 보세요.</p>
+    <p>아무도 모를 거야<br>
+        말한 적 없을 테니<br>
+        아이처럼 울고 싶은 순간들<br>
+        어른이란 말은 참 그댈 힘들게 하죠<br>
+        더 외롭게 만들어</p>
+
+<p>힘겨운 걸음으로 먼 길을 걸었는데<br>
+가고 싶은 곳은 어디였는지<br>
+어둡고 깊은 곳에 웅크려 앉은 그댈<br>
+난 떠나지 않겠어요</p>
+
+<p>아무리 먼 길을 떠났어도<br>
+아무리 긴 시간이 흘러도<br>
+이 길 끝에 떠오르는 태양을 만날 때까지<br>
+난 곁에 있겠어요</p>
+
+<p>힘겨운 걸음으로 먼 길을 걸었는데<br>
+가고 싶은 곳은 어디였는지<br>
+세상이 지독하게 그댈 혼자 둘 때엔<br>
+단 하나만 기억해요</p>
+
+<p>아무리 먼 길을 떠났어도<br>
+아무리 긴 시간이 흘러도<br>
+이 길 끝에 떠오르는 태양을 만날 때까지<br>
+난 곁에 있어요</p>
+
+<p>(I will be with you) 혼자인 것 같아<br>
+(I can be your only one)<br>
+그 어둠 속에 단 한 번의 용기,<br>
+단 한 사람의 온기<br>
+(Wanna be Warm)<br>
+그 작은 시작이 돼 줄 수 있어(in your life)</p>
+
+<p>또다시 먼 길을 떠나도<br>
+한 번 더 긴 시간이 가도<br>
+이 길 끝에 떠오르는 태양을 만날 때까지<br>
+난 곁에 있겠어요<br>
+나 곁에 있어요</p>
 </main>
 <script>
-    // UI 기능들 제작
-    // 변수 설정
-    var bt = document.querySelectorAll("button");
-    var input = document.querySelectorAll("input");
-    var i_tag = document.querySelectorAll(".fa-solid");
-    var main = document.querySelector("main");
+    // 변수설정
+    var bt = document.querySelectorAll("button"),
+        input = document.querySelectorAll("input"),
+        i_tag = document.querySelectorAll(".fa-solid"),
+        main = document.querySelector("main");
+    
     // 배경색 버튼
     input[0].onchange = function() {
         main.style.background = this.value;
     }
-    // 글자색 변경
+
+    // 글자색 버튼
     input[1].onchange = function() {
         main.style.color = this.value;
     }
+
     // 글자크기
-    input[2].onchange = function(){
-        main.style.fontSize = this.value+"px";
+    input[2].onchange = function() {
+        main.style.fontSize = this.value + "px";
     }
+
     // 다크모드
-    bt[0].onclick = function() {
-        main.style.color = "#ffffff";
+    bt[0].onclick = function(){
+        main.style.color = "#fff";
         main.style.background = "#000";
     }
+
     // 초기화
-    bt[1].onclick = function() {
+    bt[1].onclick = function(){
         // main.style.color = "";
         // main.style.background = "";
         // main.style.fontSize = "";
         main.style = "";
     }
-    // 정렬
-    i_tag[0].onclick = function(){
+
+    // 정렬버튼
+    i_tag[0].onclick = function() {
         main.style.textAlign = "left";
-        i_set(0); 
+        i_set(0);
     }
-    i_tag[1].onclick = function(){
+    i_tag[1].onclick = function() {
         main.style.textAlign = "center";
         i_set(1);
     }
-    i_tag[2].onclick = function(){
+    i_tag[2].onclick = function() {
         main.style.textAlign = "right";
         i_set(2);
     }
-    function i_set(now){
+
+    // 정렬버튼 색상변경
+    function i_set(now) {
         i_tag[0].style.color = "#ccc";
         i_tag[1].style.color = "#ccc";
         i_tag[2].style.color = "#ccc";
-        i_tag[now].style.color = "#000000";
+        i_tag[now].style.color = "#000";
     }
-    
-
 </script>
 </body>
 </html>
