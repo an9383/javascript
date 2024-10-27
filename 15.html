@@ -48,6 +48,8 @@
     var ul = document.querySelector("ul");
     var span = document.querySelectorAll("span");
     var bt = document.querySelectorAll("button");
+    var slide = document.querySelector("#slide");
+
 
     // 문제) 두번째 span을 클릭하면 ul을 움직여서 두번째 이미지가 보이도록
     // span[1].onclick = function(){
@@ -69,6 +71,10 @@
         if(page < span.length-1) {
             page++;
             ul.style.marginLeft = -450 * page + "px";
+            chk_bt()
+        } 
+        else {
+            shake();
         }
     }
     // 이전(오른쪽으로 이동) 버튼
@@ -76,13 +82,48 @@
         if(page > 0) {
             page--;
             ul.style.marginLeft = -450 * page + "px";
+            chk_bt()
         }
-    }
+        else {
+            shake();
+        }
+}
 
     // 과제) 이전/다음 버튼에 기능이 없을 때 
     //       - 버튼을 비활성하기
+    
     //       - 이미지 흔들기
-     
+    function shake() {
+        slide.style.transform = "translate(10px, 0px)";
+        setTimeout(function(){
+            slide.style.transform = "translate(0px,-8px)";
+        },50);
+        setTimeout(function(){
+            slide.style.transform = "translate(-6px, 0px)";
+        },100);
+        setTimeout(function(){
+            slide.style.transform = "translate(4px, 0px)";
+        },150);
+        setTimeout(function(){
+            slide.style.transform = "translate(0px, 2px)";
+        },200);
+        setTimeout(function(){
+            slide.style.transform = "translate(-1px, 0px)";
+        },200);
+    }
+    shacke();
+     function chk_bt(){
+        if(page ==0){
+            bt[0].disabled = "disabled";
+            bt[1].disabled = "";
+        } else if (page > 4) {
+            bt[1].disabled = "disabled";
+            bt[0].disabled = "";
+        } else {
+            bt[0].disabled = "";
+            bt[1].disabled = "";
+        }
+     }
 </script>
 </body>
 </html>

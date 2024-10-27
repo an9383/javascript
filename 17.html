@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포켓몬스터</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        h1 {text-align: center;}
+        nav { display: flex; justify-content: center; gap:10px;}
+        button {font-size: 18px; padding:5px 10px;}
+        #mon {font-size:18px; color:#333;display: block; margin:10px auto 20px;padding:5px 10px;outline:none}
+        #mon.alert {border:2px solid red;}
+        #list {border:5px solid #ccc; padding:20px; display: flex; justify-content: center; gap:10px;margin:auto; max-width: 500px;min-height: 200px; align-content: flex-start; flex-wrap: wrap;}
+        #list li { background:#eee; font-size: 18px;font-weight: bold; padding:10px 20px; list-style: none; border-radius: 50px; cursor: pointer;}
+        #list li::after {content:"\f058"; position: absolute;font-family: "Font Awesome 6 Free";margin:-5px 0 0 5px; color:#333;display: none;}
+        #list li.chk::after {display: inline;}
+        #list li.msg {background:none; font-weight: normal; color:#999;line-height:180px;}
+        #list:empty::after {content:"등록된 포켓몬이 없습니다."}
+    </style>
+</head>
+<body>
+<h1>포켓몬스터</h1>
+<nav>
+    <button>추가</button>
+    <button>삭제</button>
+    <button>복사</button>
+    <button>비우기</button>
+    <button>초기화</button>
+</nav>
+<input type="text" id="mon" placeholder="포켓몬 이름을 입력하세요">
+<ul id="list">
+    <li>피카츄</li>
+    <li>피카츄</li>
+</ul>
+<script>
+    var input = $("#mon").value();
+</script>
+
+</body>
+</html>
