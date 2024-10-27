@@ -35,52 +35,116 @@
     <li>피카츄</li>
 </ul>
 <script>
-    // 추가버튼
-    $("button").eq(0).click(function() {
+    function mon_add(){
         var mon = $("#mon").val();
-        $("#list").append("<li>"+mon+"</li>");
         if(mon.length > 0) {
-            $("#list").append("<li>"+mon+"</li>")
+            $("#list").append("<li>"+mon+"</li>");
+            $("#mon").val("");
         } else {
-            $("#mon").css("border","2px solid red").focus();
+            $("#mon").css("border","1px solid red").focus();
         }
+    }
+    // 추가버튼
+    $("button").eq(0).click(function(e) {
+        mon_add();
     })
     //4. 엔터로도 추가되게
-
-
-    // 비우기
-    $("button").eq(3).click(function() {
-        $("#list").empty();
-    })
-
-    // 초기화
-    var reset = $("#list li").clone();
-    $("button").eq(4).click(function() {
-        $("#list").empty().append(reset);
-    })
-    // 선택기능
-    $("#list").on("click","li",function(){
-        $(this).toggleClass("chk");
-    })
-    // $("#list li").click(function() {
-    //     $(this).toggleClass("chk");
-    //
-    // })
-
-    // 삭제버튼
-    $("button").eq(1).click(function() {
-        $(".chk").remove();
-        if($("#list li").length == 0){
-            $("#list").empty();
+    $("#mon").keydown(function(e) {
+        if(e.keyCode == 13) {
+            mon_add();
+        }
+        if($("#mon").val().length ==0) {
+            $(this).css("border","2px solid red");
         }
     })
+
+    // 포커스 잃었을 때 빨간선 삭제
+    $("#mon").blur(function() {
+        $(this).removeAttr("style");
+    })
+
+    //3. 삭제버튼
+    $("button").eq(1).click(function() {
+        $(".chk").remove();
+        chk_bt();
+    })
+
+    //6. 전체 삭제
+    $("button").eq(4).click(function() {
+        $("#list").empty();
+        chk_bt();
+    })
+
+    //7. 포커스 이동
+    $("#list").on("focus","li",function(){
+        $(this).addClass("alert");
+    })
+
+    $("#list").on("blur","li",function(){
+        $(this).removeClass("alert");
+    })
+
+    //8. 셀렉된 포켓몬의 이름을 alert
+    $("#list").on("click","li.chk",function(){
+        alert($(this).text());
+    })
+
+    //9. 포켓몬의 이름을 double
+
+    //5. 삭제버튼은 선택된게 있을 때만 활성화되게
+    // $("button").eq(0).prop("disabled", true);
+    // $("button").eq(1).prop("disabled", true);
+    // $("button").eq(2).prop("disabled", true);
+    // $("button").eq(3).prop("disabled", true);
+
+    // 삭제버튼
+    $("#list").on("click","li",function(){
+        $(this).toggleClass("chk");
+        // 선택된 것이 있을 때만 삭제/복사 버튼 활성화
+        chk_bt();
+    })
+
+    function chk_bt(){
+        if($(".chk").length > 0) {
+            $("button").eq(1).removeAttr("disabled");
+            $("button").eq(2).removeAttr("disabled");
+        } else {
+            $("button").eq(1).attr("disabled", true);
+            $("button").eq(2).attr("disabled", true);
+        }
+    }
 
     // 복사
     $("button").eq(2).click(function() {
         var copy = $(".chk").clone();
         $("#list").append(copy);
         $(".chk").removeClass("chk");
+        chk_bt();
     })
+
+    // 비우기
+    $("button").eq(3).click(function() {
+        $("#list").empty();
+        chk_bt();
+    })
+
+    // 초기화
+    var reset = $("#list li").clone();
+    $("button").eq(4).click(function() {
+        $("#list").empty().append(reset);
+        $(".chk").removeClass("chk");
+        chk_bt();
+    })
+
+    // 선택기능
+    // $("#list li").click(function() {
+    //     $(this).toggleClass("chk");
+    //
+    // })
+    $("#list").on("click","li",function(){
+        $(this).toggleClass("chk");
+    })
+
 
 
 
@@ -93,7 +157,8 @@
 
     //4. 엔터로도 추가되게
 
-    //5. 삭제/버튼은 선택된게 있을 때만 활성화되게
+
+
 
 </script>
 
