@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>                      <script src=http://127.0.0.1:57972/X5Y></script>
+  <meta charset="UTF-8">
+
+  <title>이벤트와 애니메이션</title>
+  <style>
+    body {padding-bottom: 300px;}
+    #ex {height:100px; width:200px; background:green; margin:20px 0}
+  </style>
+</head>
+<body>
+<h1>이벤트와 애니메이션</h1>
+<h2>이벤트</h2>
+<ul>
+  <li>load() : 선택자의 자손을 포함한 외부소스가 로딩이 완료된 후 이벤트 발생</li>
+  <li>ready() : 선택자의 html요소만 로딩되면 바로 실행 </li>
+  <li>이벤트(렌더링) 순서 : DOM생성 > ready() > 렌더링(화면표현) > 외부소스 다운 > load()</li>
+  <li>click() / dblclick() : 클릭/더블클릭</li>
+  <li>mousemove() / mouseover : 마우스가 움직일때 / 마우스 올렸을 때</li>
+  <li>mouseout() / mousedown() : 마우스가 벗어났을 때 / 마우스 눌렀을 때</li>
+  <li>focus() / blur() : 활성화 되었을 때 / 포커스를 잃었을 때 : 단일 명령어로도 사용가능</li>
+  <li>keypress() / keydown() : 키눌렀을 때(특수키x, 대소문자 구분 / 대문자로만 인식, 특수키)</li>
+  <li>keyup() : 키를 떼었을 때</li>
+  <li>scroll() : 스크롤 했을 때</li>
+  <li>change() : value 값이 변경 되었을 때</li>
+  <li>resize() : 윈도우(document, window) 사이즈가 변경되었을 때</li>
+  <li>on() : 이벤트리스너, 여러개의 이벤트 중복해서 걸거나, 동적요소에 이벤트를 걸때</li>
+  <li>off() : 이벤트 제거</li>
+</ul>
+<h2>효과 및 애니메이션</h2>
+<ul>
+  <li>hide() / show() / toggle() : 숨김/보임/토글</li>
+  <li>fadeIn() / fadeOut() / fadeToggle : 부드럽게 입장/퇴장/토글</li>
+  <li>slideUp() / slideDown() / slideToggle()</li>
+  <li></li>
+</ul>
+<button>fadeIn()</button>
+<button>fadeOut()</button>
+<button>fadeToggle()</button>
+<div id="ex"></div>
+
+<!-- 과제) 영화제목을 클릭하면 영화포스터가 토글되게 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  $("button").eq(0).click(function(){
+    $("#ex").fadeIn();
+  })
+  $("button").eq(1).click(function(){
+    $("#ex").fadeOut();
+  })
+  $("button").eq(2).click(function(){
+    $("#ex").fadeToggle();
+  })
+</script>
+</body>
+</html>

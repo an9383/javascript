@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>                      <script src=http://127.0.0.1:57972/K4e></script>
+    <meta charset="UTF-8">
+
+    <title>포컷몬스터</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        h1 {text-align: center;}
+        nav { display: flex; justify-content: center; gap:10px;}
+        button {font-size: 18px; padding:5px 10px;}
+        #mon {font-size:18px; color:#333;display: block; margin:10px auto 20px;padding:5px 10px;outline:none; border:1px solid #333}
+        #mon.alert {border:2px solid red;}
+        #list {border:5px solid #ccc; padding:20px; display: flex; justify-content: center; gap:10px;margin:auto; max-width: 500px;min-height: 200px; align-content: flex-start; flex-wrap: wrap;}
+        #list li { background:#eee; font-size: 18px;font-weight: bold; padding:10px 20px; list-style: none; border-radius: 50px; cursor: pointer; user-select: none;}
+        #list li::after {content:"\f058"; position: absolute;font-family: "Font Awesome 6 Free";margin:-5px 0 0 5px; color:#333;display: none;}
+        #list li.chk::after {display: inline;}
+        #list li.msg {background:none; font-weight: normal; color:#999;line-height:180px;}
+        #list:empty::after {content:"등록된 포켓몬이 없습니다."}
+    </style>
+</head>
+<body>
+<h1>포켓몬스터</h1>
+<nav>
+    <button>추가</button>
+    <button disabled>삭제</button>
+    <button disabled>복사</button>
+    <button>비우기</button>
+    <button>초기화</button>
+</nav>
+<input type="text" id="mon" placeholder="포켓몬 이름을 입력하세요">
+<ul id="list">
+    <li>피카츄</li>
+    <li>피카츄</li>
+</ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // 추가버튼
+    $("button").eq(0).click(function(){
+        var mon = $("#mon").val();
+        mon_add()
+    })
+
+    // 엔터눌러도 추가되게
+    $("#mon").keyup(function(e){
+        // alert(e.keyCode)
+        if(e.keyCode == 13) {
+            mon_add()
+        }
+        if($("#mon").val().length==0) {
+            $("#mon").css("border","1px solid red").focus();
+        } else {
+            $(this).removeAttr("style");
+        }
+    })
+    // 포커스 잃을 때 빨간선 삭제
+    $("#mon").blur(function(){
+        $(this).removeAttr("style");
+    })
+    function mon_add() {
+        var mon = $("#mon").val();
+        if(mon.length > 0) {
+            $("#list").append("<li>"+mon+"</li>");
+            $("#mon").val("");  // 포켓몬 추가후 입력란 비우기
+        } else {
+            $("#mon").css("border","1px solid red").focus();
+        }
+    }
+
+    // 비우기버튼
+    $("button").eq(3).click(function(){
+        $("#list").empty();
+        chk_bt();
+    })
+
+    // 초기화 버튼
+    var reset = $("#list li").clone();
+    $("button").eq(4).click(function(){
+        $("#list").empty().append(reset);
+        $(".chk").removeClass("chk");
+        chk_bt();
+    })
+
+    // 선택기능
+    // $("#list li").click(function(){
+    //     $(this).toggleClass("chk");
+    // })
+
+    $("#list").on("click","li",function(){
+        $(this).toggleClass("chk");
+        // 선택된 것이 있을 때만 삭제/복사 버튼 활성화
+        chk_bt();
+    })
+    function chk_bt() {
+        if($(".chk").length > 0) { // 선택된것이 있으면
+            $("button").eq(1).removeAttr("disabled");
+            $("button").eq(2).removeAttr("disabled");
+        } else {
+            $("button").eq(1).attr("disabled","disabled");
+            $("button").eq(2).attr("disabled","disabled");
+        }
+    }
+
+    // 삭제버튼
+    $("button").eq(1).click(function(){
+        $(".chk").remove();
+        // 비어있을 때 메세지 출력용
+        if($("#list li").length == 0) {
+            $("#list").empty();
+        }
+        chk_bt();
+    })
+    // 복사버튼
+    $("button").eq(2).click(function(){
+        var copy = $(".chk").clone();
+        $("#list").append(copy);
+        $(".chk").removeClass("chk");
+        chk_bt();
+    })
+
+    // 버그 리스트
+    // 1. 비어있을 때 추가되는 현상
+    // 2. 추가된 li는 선택안됨
+    // 3. 모두 삭제해도 메세지 나오게
+    // 4. 엔터로도 추가되게
+    // 5. 삭제/버튼은 선택된게 있을 때만 활성화되게
+
+
+</script>
+</body>
+</html>
