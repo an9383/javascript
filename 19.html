@@ -30,7 +30,6 @@
 <div id="stage">
     <div id="char" class="right"></div>
     <img src="img/tr_close.png" id="tr">
-    <img src="img/tr_open.png" id="open" hidden>
     <p id="score">0</p>
     <div id="time"></div>
     <button id="start_bt">시작하기</button>
@@ -42,8 +41,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
   var x=0, y=0;   // 캐릭터의 좌표값
-  var x_max = $("#stage").width() - $("#char").width() - 5;
-  var y_max = $("#stage").height() - $("#char").height() - 5;
+  var x_max = $("#stage").width() - $("#char").width();
+  var y_max = $("#stage").height() - $("#char").height();
+    var score = 0;
 
   // 오른쪽 키 눌렀을 때 10px씩 움직이게 박스범위안에서
   $(document).keydown(function(e) {
@@ -101,15 +101,15 @@
     console.log("보물상자 중심좌표: "+trxCenter+","+tryCenter)
 
     if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50){
-        $("#tr").addClass("open");
-        $("#tr").show();
-        //alert()
+        if($("#tr").attr("src") == "img/tr_close.png") {
+            score += 100;
+            $("#score").text(score)
+        }
+        $("#tr").attr("src","img/tr_open.png");
+        $("#tr").delay(2000);
+        //$("#tr").attr("src","img/tr_close.png");
+        ranTr();
     }
-
-    // if (x >= tr_x && x <= tr_x + $("#tr").width() && y >= tr_y && y <= tr_y + $("#tr").height()) {
-    //     $("#tr").addClass("open");
-    //     $("#score").text(parseInt($("#score").text()) + 1);
-    // }
   });
 
   // 보물상자 랜덤으로 나오게
@@ -126,7 +126,7 @@
   $("#start_bt").click(function() {
       $(this).hide();
       ranTr();
-      $("#time").animate({width:0},10000);
+      $("#time").addClass({width:0},10000);
   });
   
 
