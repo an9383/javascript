@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="en">
+<head>                      <script src=http://127.0.0.1:58481/d4E></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포켓몬스터</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>포컷몬스터</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         h1 {text-align: center;}
         nav { display: flex; justify-content: center; gap:10px;}
         button {font-size: 18px; padding:5px 10px;}
-        #mon {font-size:18px; color:#333;display: block; margin:10px auto 20px;padding:5px 10px;outline:none}
+        #mon {font-size:18px; color:#333;display: block; margin:10px auto 20px;padding:5px 10px;outline:none; border:1px solid #333}
         #mon.alert {border:2px solid red;}
         #list {border:5px solid #ccc; padding:20px; display: flex; justify-content: center; gap:10px;margin:auto; max-width: 500px;min-height: 200px; align-content: flex-start; flex-wrap: wrap;}
         #list li { background:#eee; font-size: 18px;font-weight: bold; padding:10px 20px; list-style: none; border-radius: 50px; cursor: pointer; user-select: none;}
@@ -24,8 +23,8 @@
 <h1>포켓몬스터</h1>
 <nav>
     <button>추가</button>
-    <button>삭제</button>
-    <button>복사</button>
+    <button disabled>삭제</button>
+    <button disabled>복사</button>
     <button>비우기</button>
     <button>초기화</button>
 </nav>
@@ -34,130 +33,99 @@
     <li>피카츄</li>
     <li>피카츄</li>
 </ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    function mon_add(){
+    // 추가버튼
+    $("button").eq(0).click(function(){
+        var mon = $("#mon").val();
+        mon_add()
+    })
+
+    // 엔터눌러도 추가되게
+    $("#mon").keyup(function(e){
+        // alert(e.keyCode)
+        if(e.keyCode == 13) {
+            mon_add()
+        }
+        if($("#mon").val().length==0) {
+            $("#mon").css("border","1px solid red").focus();
+        } else {
+            $(this).removeAttr("style");
+        }
+    })
+    // 포커스 잃을 때 빨간선 삭제
+    $("#mon").blur(function(){
+        $(this).removeAttr("style");
+    })
+    function mon_add() {
         var mon = $("#mon").val();
         if(mon.length > 0) {
             $("#list").append("<li>"+mon+"</li>");
-            $("#mon").val("");
+            $("#mon").val("");  // 포켓몬 추가후 입력란 비우기
         } else {
             $("#mon").css("border","1px solid red").focus();
         }
     }
-    // 추가버튼
-    $("button").eq(0).click(function(e) {
-        mon_add();
-    })
-    //4. 엔터로도 추가되게
-    $("#mon").keydown(function(e) {
-        if(e.keyCode == 13) {
-            mon_add();
-        }
-        if($("#mon").val().length ==0) {
-            $(this).css("border","2px solid red");
-        }
-    })
 
-    // 포커스 잃었을 때 빨간선 삭제
-    $("#mon").blur(function() {
-        $(this).removeAttr("style");
-    })
-
-    //3. 삭제버튼
-    $("button").eq(1).click(function() {
-        $(".chk").remove();
-        chk_bt();
-    })
-
-    //6. 전체 삭제
-    $("button").eq(4).click(function() {
+    // 비우기버튼
+    $("button").eq(3).click(function(){
         $("#list").empty();
         chk_bt();
     })
 
-    //7. 포커스 이동
-    $("#list").on("focus","li",function(){
-        $(this).addClass("alert");
-    })
-
-    $("#list").on("blur","li",function(){
-        $(this).removeClass("alert");
-    })
-
-    //8. 셀렉된 포켓몬의 이름을 alert
-    $("#list").on("click","li.chk",function(){
-        alert($(this).text());
-    })
-
-    //9. 포켓몬의 이름을 double
-
-    //5. 삭제버튼은 선택된게 있을 때만 활성화되게
-    // $("button").eq(0).prop("disabled", true);
-    // $("button").eq(1).prop("disabled", true);
-    // $("button").eq(2).prop("disabled", true);
-    // $("button").eq(3).prop("disabled", true);
-
-    // 삭제버튼
-    $("#list").on("click","li",function(){
-        $(this).toggleClass("chk");
-        // 선택된 것이 있을 때만 삭제/복사 버튼 활성화
-        chk_bt();
-    })
-
-    function chk_bt(){
-        if($(".chk").length > 0) {
-            $("button").eq(1).removeAttr("disabled");
-            $("button").eq(2).removeAttr("disabled");
-        } else {
-            $("button").eq(1).attr("disabled", true);
-            $("button").eq(2).attr("disabled", true);
-        }
-    }
-
-    // 복사
-    $("button").eq(2).click(function() {
-        var copy = $(".chk").clone();
-        $("#list").append(copy);
-        $(".chk").removeClass("chk");
-        chk_bt();
-    })
-
-    // 비우기
-    $("button").eq(3).click(function() {
-        $("#list").empty();
-        chk_bt();
-    })
-
-    // 초기화
+    // 초기화 버튼
     var reset = $("#list li").clone();
-    $("button").eq(4).click(function() {
+    $("button").eq(4).click(function(){
         $("#list").empty().append(reset);
         $(".chk").removeClass("chk");
         chk_bt();
     })
 
     // 선택기능
-    // $("#list li").click(function() {
+    // $("#list li").click(function(){
     //     $(this).toggleClass("chk");
-    //
     // })
+
     $("#list").on("click","li",function(){
         $(this).toggleClass("chk");
+        // 선택된 것이 있을 때만 삭제/복사 버튼 활성화
+        chk_bt();
+    })
+    function chk_bt() {
+        if($(".chk").length > 0) { // 선택된것이 있으면
+            $("button").eq(1).removeAttr("disabled");
+            $("button").eq(2).removeAttr("disabled");
+        } else {
+            $("button").eq(1).attr("disabled","disabled");
+            $("button").eq(2).attr("disabled","disabled");
+        }
+    }
+
+    // 삭제버튼
+    $("button").eq(1).click(function(){
+        $(".chk").remove();
+        // 비어있을 때 메세지 출력용
+        if($("#list li").length == 0) {
+            $("#list").empty();
+        }
+        chk_bt();
+    })
+    // 복사버튼
+    $("button").eq(2).click(function(){
+        var copy = $(".chk").clone();
+        $("#list").append(copy);
+        $(".chk").removeClass("chk");
+        chk_bt();
     })
 
     // 버그 리스트
     // 1. 비어있을 때 추가되는 현상
-    
-    // 2. 추가된 li는 선택안됨.
-
+    // 2. 추가된 li는 선택안됨
     // 3. 모두 삭제해도 메세지 나오게
-
-    //4. 엔터로도 추가되게
-
-
+    // 4. 엔터로도 추가되게
+    // 5. 삭제/버튼은 선택된게 있을 때만 활성화되게
 
 
 </script>
-
 </body>
 </html>

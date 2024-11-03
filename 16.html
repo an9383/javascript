@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head>                      <script src=http://127.0.0.1:58481/K56></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>jQuery 기본</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-        body.dark {background: #000; color: #fff;}
+        body {height:500vh;}
+        body.dark {background:#000; color:#fff}
     </style>
 </head>
 <body>
@@ -14,10 +15,10 @@
 <ul>
     <li>제이쿼리는 자바스크립트로 만든 라이브러리(프레임워크)</li>
     <li>라이브러리 : 함수(특정 기능)를 많들어 놓은 것, jQuery, css라이브러리</li>
-    <li>프레임워크 : 작업환경을 제공하는 것</li>
+    <li>프레임워크 : 작업환경을 제공하는 것(리액트, 뷰, 앵글러...)</li>
     <li>공식사이트 : https://jquery.com/</li>
-    <li>버전 1.x(구브라우저 호환), 버전 2.x(구브라우저 호환제외, 가벼워짐), 3.x(구브라우저 호환x, 기능강화)</li>
-    <li>uncompressed(원본), minified(압축), slim(간소화버전), slim minified(간소화 압축)</li>
+    <li>버전 1.x(구브라우저 호환), 버전 2.x(구브라우저 호환 제외, 가벼워짐), 3.x(구브라우저 호환X, 기능강화)</li>
+    <li>uncompressed(원본), minified(압축), slim(간소화버전), slim minified(간호화 압축)</li>
     <li>선택자가 jQuery면 명령어도 jQuery여야함.</li>
 </ul>
 <h2>기본 메서드</h2>
@@ -25,29 +26,29 @@
     <li>css() : style속성을 변경/가져올 때</li>
     <li id="red">attr() : 요소의 속성을 변경/가져올 때</li>
     <li>text() : <strong>글자</strong>를 변경/가져올 때</li>
-    <li>html() : 글자+html를 변경/가져올 때</li>
-    <li>addClass / removeClasss() / toggleClass() : 클래스 추가/삭제/토글</li>
+    <li>html() : 글자+html를 변경/가져올때</li>
+    <li>addClass() / removeClass() / toggleClass() : 클래스 추가/삭제/토글</li>
     <li>click() : 클릭이벤트 <button>클래스 토글</button></li>
-    <li>eq(): 선택자의 인덱스번호로 재선택</li>
+    <li>eq() : 선택자의 인덱스번호로 재선택</li>
 </ul>
 <h2>수치관련</h2>
 <ul>
     <li>width() / height() : 폭/높이값을 적용/가져올 때</li>
-    <li>offset().top / left : 절대좌표값(top, left)을 반환</li>
+    <li>offset().top/left : 절대좌표값(top, left)을 반환</li>
     <li>scrollTop() : 스크롤값을 얻거나 적용</li>
 </ul>
 <button>body의 폭값은?</button>
 <button>현재 버튼의 절대좌표는? (left:??, top:??)</button>
 <button>현재 스크롤값은?</button>
 <button>스크롤 높이를 100으로 이동</button>
-<h2>객체(DOM) 편집 메서드</h2>
+<h2>객체(돔) 편집 메서드</h2>
 <ul id="edit">
     <li>before() : 선택자 앞에 추가</li>
     <li>after() : 선택자 뒤에 추가</li>
     <li>prepend() : 선택자 첫 자식으로 추가</li>
     <li>append() : 선택자 마지막 자식으로 추가</li>
     <li>clone() : 선택자를 복사</li>
-    <li>remove(): 선택자를 삭제</li>
+    <li>remove() : 선택자를 삭제</li>
     <li>empty() : 선택자 안의 내용을 비움</li>
 </ul>
 <button>before()</button>
@@ -59,77 +60,82 @@
 <button>첫번째 li 비우기</button>
 <h2>기타 메서드</h2>
 <ul>
-    <li>val() : value</li>
-    <li>parent() : 선택자의 부모를 선택자</li>
+    <li>val() : value 값을 얻거나 지정할 때</li>
+    <li>parent() : 선택자의 부모를 선택</li>
     <li>parents(".on") : 선택자 조상중에 클래스 on을 선택 </li>
     <li>children("a") : 선택자 자식중의 a태그를 선택</li>
-    <li>find(".on") : 선택자 자손중의 on이라는 클래스를 찾아라.</li>
+    <li>find(".on") : 선택자 자손중의 클래스 on을 선택</li>
     <li>not(".on") : 선택자중에서 클래스 on을 제외</li>
-    <li>next() / prev() : 선택자 다음/이전형제 요소를 선택</li>
-    <li>hasClass("on") : 선택자에 클래스가 있으면 true</li>
-    <li></li>
+    <li>next() / prev() : 선택자 다음/이전 형제 요소를 선택</li>
+    <li>hasClass("on") : 선택자에 클래스가 있으면 true, 없으면 false</li>
+    <li>is(":checked") : 선택자에 체크가 되어 있으면 true, 없으면 false, :selected, :visible, :hidden</li>
+    <li>get(0) : 제이쿼리 선택자를 자바스크립트 선택자로 변환</li>
+    <li>each() : 선택자 갯수만큼 반복할 때 사용</li>
 </ul>
+<button>body에 dark 클래스 유무?</button>
 <script>
-    //alert($("li:nth-child(1)").css("background-color","green"));
-    $("#red").attr("id", "green");  //setter
-    var name = $("#green").attr("id");    //getter
-    //alert(name);
-    //alert($("#base li:nth-child(3)").text());
-    //alert($("#base li:nth-child(3)").html());
-    $("button").eq(2).click(function() {
-        $("body").toggleClass("dark");
+    // alert($("li:nth-child(1)").css("background-color"));
+    $("#red").attr("id","green");   //setter
+    var name = $("#green").attr("id");//getter
+    // alert(name);
+    // alert($("#base li:nth-child(3)").text());
+    // alert($("#base li:nth-child(3)").html());
+    $("button").eq(0).click(function(){
+        $("body").toggleClass("dark")
     })
-    //$("li").eq(2).css("border","1px solid red");
-
-    //body의 폭값은?
-    $("button").eq(1).click(function() {
-        var w = $("body").width("width");
-        alert(w)
+    $("li").eq(2).css("border", "1px solid red")
+    // body의 폭값은?
+    $("button").eq(1).click(function(){
+        var w = $("body").width();
+        alert(w);
     })
-    //현재 버튼의 절대좌표는?
-    $("button").eq(2).click(function() {
+    // 현재 버튼의 절대좌표는? (left:??, top:??)
+    $("button").eq(2).click(function(){
         var x = $(this).offset().left;
         var y = $(this).offset().top;
-        alert("left: "+x+", top: "+y);
+        alert("left : "+x+", top : "+y);
     })
-    //현재 스크롤값은?
-    $("button").eq(3).click(function() {
+    // 현재 스크롤값은?
+    $("button").eq(3).click(function(){
         var t = $(document).scrollTop();
-        alert("현재 스크롤값: "+t);
+        alert("현재 스크롤 : "+t);
     })
-    //스크롤 높이를 100으로 이동
-    $("button").eq(4).click(function() {
-        $(document).scrollTop(100)
+    // 스크롤 높이를 100으로 이동
+    $("button").eq(4).click(function(){
+        $(document).scrollTop(100);
     })
     //before()
-    $("button").eq(5).click(function() {
+    $("button").eq(5).click(function(){
         $("#edit li").eq(1).before("<li>before로 추가된 li</li>")
     })
     //after()
-    $("button").eq(6).click(function() {
+    $("button").eq(6).click(function(){
         $("#edit li").eq(1).after("<li>after로 추가된 li</li>")
     })
-    //prepend()
-    $("button").eq(7).click(function() {
+    // prepend()
+    $("button").eq(7).click(function(){
         $("#edit").prepend("<li>prepend로 추가된 li</li>")
     })
-    //append()
-    $("button").eq(8).click(function() {
-        $("#edit").after("<li>append로 추가된 li</li>")
+    // append()
+    $("button").eq(8).click(function(){
+        $("#edit").append("<li>append로 추가된 li</li>")
     })
-    //돔(태그)복사
-    $("button").eq(9).click(function() {
+    // 돔(태그)복사
+    $("button").eq(9).click(function(){
         var copy = $("#edit li").eq(0).clone();
         $("#edit").append(copy);
     })
-    //remove()
-    $("button").eq(9).click(function() {
+    // remove()
+    $("button").eq(10).click(function(){
         var copy = $("#edit li").eq(3).remove();
-        $("#edit").remove(copy);
-    })  
-    //empty()
-    $("button").eq(9).click(function() {
+    })
+    // empty()
+    $("button").eq(11).click(function(){
         var copy = $("#edit li").eq(0).empty();
+    })
+
+    $("button").eq(12).click(function(){
+        alert($("body").hasClass("dark"));
     })
 </script>
 </body>
