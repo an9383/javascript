@@ -43,72 +43,75 @@
   var x=0, y=0;   // 캐릭터의 좌표값
   var x_max = $("#stage").width() - $("#char").width();
   var y_max = $("#stage").height() - $("#char").height();
-    var score = 0;
+  var score = 0;
+  var play = false;
 
   // 오른쪽 키 눌렀을 때 10px씩 움직이게 박스범위안에서
   $(document).keydown(function(e) {
-    // 오른쪽(39)
-    if (e.keyCode == 39 && x < x_max) {
-        x += 10
-        if(x > x_max) { x = x_max; }
-        else { 
-            $("#char").removeAttr("class");
-            $("#char").css("left", x+"px"); 
-            $("#char").addClass("right");
-            $("#char").css("background-position-x","+="+86+"px")
+    if(play) {
+        // 오른쪽(39)
+        if (e.keyCode == 39 && x < x_max) {
+            x += 10
+            if(x > x_max) { x = x_max; }
+            else { 
+                
+                $("#char").css("left", x+"px"); 
+                $("#char").removeAttr("class");
+                $("#char").addClass("right");
+                $("#char").css("background-position-x","+="+86+"px")
+            }
         }
-    }
-    // 왼쪽(37)
-    if (e.keyCode == 37&& x > 0) {
-        x -= 10
-        if(x < 0) { x = 0; }
-        else {
-            $("#char").removeAttr("class");
-            $("#char").css("left", x+"px");
-            $("#char").addClass("left");
-            $("#char").css("background-position-x","-="+86+"px")
+        // 왼쪽(37)
+        if (e.keyCode == 37&& x > 0) {
+            x -= 10
+            if(x < 0) { x = 0; }
+            else {
+                $("#char").removeAttr("class");
+                $("#char").css("left", x+"px");
+                $("#char").addClass("left");
+                $("#char").css("background-position-x","-="+86+"px")
+            }
         }
-    }
-    // 아래(40)
-    if (e.keyCode == 40 && y < y_max) {
-        y += 10
-        if(y > y_max) { y = y_max; }
-        else { 
-            $("#char").removeAttr("class");
-            $("#char").css("top", y+"px"); 
-            $("#char").addClass("top");
-            $("#char").css("background-position-x","+="+86+"px")
+        // 아래(40)
+        if (e.keyCode == 40 && y < y_max) {
+            y += 10
+            if(y > y_max) { y = y_max; }
+            else { 
+                $("#char").removeAttr("class");
+                $("#char").css("top", y+"px"); 
+                $("#char").addClass("top");
+                $("#char").css("background-position-x","+="+86+"px")
+            }
         }
-    }
-    // 위(38)
-    if (e.keyCode == 38 && y > 0) {
-        y -= 10
-        if(y < 0) { y = 0; }
-        else {
-            $("#char").removeAttr("class");
-            $("#char").css("top", y+"px");
-            $("#char").addClass("bottom");
-            $("#char").css("background-position-x","-="+86+"px")
+        // 위(38)
+        if (e.keyCode == 38 && y > 0) {
+            y -= 10
+            if(y < 0) { y = 0; }
+            else {
+                $("#char").removeAttr("class");
+                $("#char").css("top", y+"px");
+                $("#char").addClass("bottom");
+                $("#char").css("background-position-x","-="+86+"px")
+            }
         }
-    }
 
-    // 보물상자 충돌감지
-    var xCenter = x+$("#char").width()/2;
-    var yCenter = y+$("#char").height()/2;
-    var trxCenter = tr_x+$("#tr").width()/2;
-    var tryCenter = tr_y+$("#tr").height()/2;
-    console.log("캐릭터 중심좌표: "+xCenter+","+yCenter);
-    console.log("보물상자 중심좌표: "+trxCenter+","+tryCenter)
+        // 보물상자 충돌감지
+        var xCenter = x+$("#char").width()/2;
+        var yCenter = y+$("#char").height()/2;
+        var trxCenter = tr_x+$("#tr").width()/2;
+        var tryCenter = tr_y+$("#tr").height()/2;
+        console.log("캐릭터 중심좌표: "+xCenter+","+yCenter);
+        console.log("보물상자 중심좌표: "+trxCenter+","+tryCenter)
 
-    if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50){
-        if($("#tr").attr("src") == "img/tr_close.png") {
-            score += 100;
-            $("#score").text(score)
+        if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50) {
+            if($("#tr").attr("src") == "img/tr_close.png") {
+                score += 100;
+                $("#score").text(score)
+                // 문제) 1초후 새 보물상자 나오게
+                setTimeout(ranTr, 1000);
+            }
+            $("#tr").attr("src","img/tr_open.png");
         }
-        $("#tr").attr("src","img/tr_open.png");
-        $("#tr").delay(2000);
-        //$("#tr").attr("src","img/tr_close.png");
-        ranTr();
     }
   });
 
@@ -117,6 +120,7 @@
   var tr_y;
   
   function ranTr() {
+    $("#tr").attr("src","img/tr_close.png");
     tr_x = parseInt(Math.random()*($("#stage").width()-$("#tr").width()));
     tr_y = parseInt(Math.random()*($("#stage").height()-$("#tr").height()));
     $("#tr").css({left:tr_x, top:tr_y})
@@ -124,9 +128,22 @@
 
   // 시작 버튼
   $("#start_bt").click(function() {
+      play = true;
       $(this).hide();
       ranTr();
-      $("#time").addClass({width:0},10000);
+      $("#time").addClass("play");
+
+      // 10초후 엔딩화면 나오게
+      setTimeout(function(){
+        $("#ending span").text(score);
+        $("#ending").fadeIn("fast");
+        play = false;
+        },10000)
+  });
+
+  // REPLAY 버튼
+  $("#ending button").click(function() {
+    location.reload();
   });
   
 
