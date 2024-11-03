@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      * {margin:0; padding:0;}
+      body {padding:50px;}
+      h1 {text-align: center; padding:50px 0;}
+      #stage {background:#efefef; border:5px solid #ddd; width:100%; height:calc(100vh - 255px); position: relative;}
+      #stage #char.right {background-position-y: -384px ;}
+      #stage #char.left {background-position-y: -255px;}
+      #stage #char.top {background-position-y: -130px;}
+      #stage #char.bottom {background-position-y: 0;}
+      #stage #char {width:76px; height:96px; position: absolute; background:0 0 / 344px url(img/act.png); z-index: 100;}
+      #stage #score {position: absolute; right:0; top:-30px; font:bold 20px/20px tahoma; color:#333}
+      #stage #score::before {content: ""; position: absolute; width:20px; height:20px; 
+      background: url(img/coin.png) center /contain; margin-left:-30px;}
+      #stage #tr {position: absolute;left:-9000px;}
+      #stage #tr.open {margin-top:-33px;}
+      #stage #time {background:#02cc5d; color:#d30606; width: 100%;position: absolute; height:10px;bottom:-20px;}
+      #stage #time.play {width:0; background:#d30606;transition: linear all 10s;}
+      #start_bt {cursor: pointer; position: fixed; left:50%; top:50%; transform: translate(-50%,-50%);font-size:20px; padding:5px 15px;}
+      #ending {position: fixed; left:50%; top:50%; transform: translate(-50%,-50%);margin-top:50px;display: none;}
+      #ending button {font-size:20px; padding: 10px 20px; display: block; margin:15px auto 0; cursor: pointer;}</style>
+</head>
+<body>
+<h1>RPG 게임 따라하기</h1>
+<div id="stage">
+    <div id="char" class="right"></div>
+    <img src="img/tr_close.png" id="tr">
+    <img src="img/tr_open.png" id="open" hidden>
+    <p id="score">0</p>
+    <div id="time"></div>
+    <button id="start_bt">시작하기</button>
+    <div id="ending">
+        <p>당신의 코인은 <span>xxxx</span>개 입니다.</p>
+        <button>REPLAY</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  var x=0, y=0;   // 캐릭터의 좌표값
+  var x_max = $("#stage").width() - $("#char").width() - 5;
+  var y_max = $("#stage").height() - $("#char").height() - 5;
+
+  // 오른쪽 키 눌렀을 때 10px씩 움직이게 박스범위안에서
+  $(document).keydown(function(e) {
+    // 오른쪽(39)
+    if (e.keyCode == 39 && x < x_max) {
+        x += 10
+        if(x > x_max) { x = x_max; }
+        else { 
+            $("#char").removeAttr("class");
+            $("#char").css("left", x+"px"); 
+            $("#char").addClass("right");
+            $("#char").css("background-position-x","+="+86+"px")
+        }
+    }
+    // 왼쪽(37)
+    if (e.keyCode == 37&& x > 0) {
+        x -= 10
+        if(x < 0) { x = 0; }
+        else {
+            $("#char").removeAttr("class");
+            $("#char").css("left", x+"px");
+            $("#char").addClass("left");
+            $("#char").css("background-position-x","-="+86+"px")
+        }
+    }
+    // 아래(40)
+    if (e.keyCode == 40 && y < y_max) {
+        y += 10
+        if(y > y_max) { y = y_max; }
+        else { 
+            $("#char").removeAttr("class");
+            $("#char").css("top", y+"px"); 
+            $("#char").addClass("top");
+            $("#char").css("background-position-x","+="+86+"px")
+        }
+    }
+    // 위(38)
+    if (e.keyCode == 38 && y > 0) {
+        y -= 10
+        if(y < 0) { y = 0; }
+        else {
+            $("#char").removeAttr("class");
+            $("#char").css("top", y+"px");
+            $("#char").addClass("bottom");
+            $("#char").css("background-position-x","-="+86+"px")
+        }
+    }
+
+    // 보물상자 충돌감지
+    var xCenter = x+$("#char").width()/2;
+    var yCenter = y+$("#char").height()/2;
+    var trxCenter = tr_x+$("#tr").width()/2;
+    var tryCenter = tr_y+$("#tr").height()/2;
+    console.log("캐릭터 중심좌표: "+xCenter+","+yCenter);
+    console.log("보물상자 중심좌표: "+trxCenter+","+tryCenter)
+
+    if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50){
+        $("#tr").addClass("open");
+        $("#tr").show();
+        //alert()
+    }
+
+    // if (x >= tr_x && x <= tr_x + $("#tr").width() && y >= tr_y && y <= tr_y + $("#tr").height()) {
+    //     $("#tr").addClass("open");
+    //     $("#score").text(parseInt($("#score").text()) + 1);
+    // }
+  });
+
+  // 보물상자 랜덤으로 나오게
+  var tr_x;
+  var tr_y;
+  
+  function ranTr() {
+    tr_x = parseInt(Math.random()*($("#stage").width()-$("#tr").width()));
+    tr_y = parseInt(Math.random()*($("#stage").height()-$("#tr").height()));
+    $("#tr").css({left:tr_x, top:tr_y})
+  }
+
+  // 시작 버튼
+  $("#start_bt").click(function() {
+      $(this).hide();
+      ranTr();
+      $("#time").animate({width:0},10000);
+  });
+  
+
+</script>
+</body>
+</html>
