@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>농구게임만들기</title>
+    <link rel="styleSheet" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/example-02.js" defer /></script>
+</head>
+
+<body>
+    <div class="scoreboard">
+        <div class="scoreboard inner">
+            <div class="shots-left">
+                <span>남은 슛 횟수</span>
+                <span id="left">15</span>
+            </div>
+            <div class="score">
+                <div class="score-name">컴퓨터</div>
+                <div id="computerScore" class="score-number">0</div>
+            </div>
+            <div class="score">
+                <div class="score-name">사용자</div>
+                <div id="userScore" class="score-number">0</div>
+            </div>
+            <div id="text"></div>
+        </div>
+    </div>
+
+    <!--조작부 UI---->
+    <div class="control-panel">
+        <div id="computer" class="panel">
+            <div class="control-name">컴퓨터</div>
+            <button class="btn-computer" onclick="onComputerShoot()" disabled>슛하기</button>
+        </div>
+        <div id="user" class="panel">
+            <div class="control-name">사용자</div>
+            <button class="btn-user" onclick="onUserShoot(2)" disabled>2점슛</button>
+            <button class="btn-user" onclick="onUserShoot(3)" disabled>3점슛</button>
+        </div>
+    </div>
+</body>
+
+</html>
