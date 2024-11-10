@@ -81,7 +81,7 @@ function onUserShoot(shootType) {
         return;
 
     if (shootType === 2) {
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.9) {
             showText('2점슛이 성공했습니다!');
 
             updateUserScore(2);
@@ -90,7 +90,7 @@ function onUserShoot(shootType) {
             showText('2점슛이 실패했습니다');
         }
     } else {
-        if (Math.random() < 0.33) { //3점슛 1/3확률로 성공
+        if (Math.random() < 0.5) { //3점슛 1/3확률로 성공
             showText('3점슛이 성공했습니다!');
 
             updateUserScore(3);
