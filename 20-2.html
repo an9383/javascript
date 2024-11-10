@@ -16,15 +16,24 @@
 <body>
    <h1>틀린그림 찾기</h1>
 <ul id="q">
-    <li>
+    <li data-correct="[50,80],[205,125]">
         <img src="img/20-2-1.jpg" >
         <img src="img/20-2-2.jpg" >
     </li>
 </ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    var correct = [eval($("#q li").eq(0).data("correct"))]; //eval은 스크립트를 명령어로 인식함.
+    // alert(correct[0]);
     $("img").click(function(e) {
         console.log(e.offsetX+", "+e.offsetY);
+        // 정답처리
+        console.log(correct.length);
+        if(Math.abs(correct[0][0] - e.offsetX) < 30 && Math.abs(correct[0][1] - e.offsetY) < 30) {
+            alert("정답");
+        } else {
+            alert("오답");
+        }
     })
 </script>
 </body>
