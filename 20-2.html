@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>틀린그림 찾기</title>
+    <style>
+        * {margin:0; padding:0; list-style: none;}
+        h1 {padding:50px; text-align: center;}
+        #q {padding:20px;}
+        #q li {display: flex; gap:10px; flex-wrap: wrap; 
+            justify-content: center;}
+        #q img {width:calc((100% - 10px))/2;}
+    </style>
+</head>
+<body>
+   <h1>틀린그림 찾기</h1>
+<ul id="q">
+    <li>
+        <img src="img/20-2-1.jpg" >
+        <img src="img/20-2-2.jpg" >
+    </li>
+</ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $("img").click(function(e) {
+        console.log(e.offsetX+", "+e.offsetY);
+    })
+</script>
+</body>
+</html>

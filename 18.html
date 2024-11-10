@@ -1,93 +1,63 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트와 애니메이션</title>
     <style>
-        body {padding-bottom: 300px;}
-        #ex {height:100px; width:200px; background:green; margin:20px 0}
-        #car {position: fixed; left:0; top:0; width:100px; height:100px; object-fit: contain;}
+      body { padding-bottom: 300px;}
+      #ex {height: 100px; width:200px; background: green; margin: 20px 0}
     </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 <h1>이벤트와 애니메이션</h1>
 <h2>이벤트</h2>
 <ul>
-    <li>load() : 선택자의 자손을 포함한 외부소스가 로딩이 완료된 후 이벤트 발생</li>
-    <li>ready() : 선택자의 html요소만 로딩되면 바로 실행 </li>
-    <li>이벤트(렌더링) 순서 : DOM생성 > ready() > 렌더링(화면표현) > 외부소스 다운 > load()</li>
-    <li>click() / dblclick() : 클릭/더블클릭</li>
-    <li>mousemove() / mouseover : 마우스가 움직일때 / 마우스 올렸을 때</li>
-    <li>mouseout() / mousedown() : 마우스가 벗어났을 때 / 마우스 눌렀을 때</li>
-    <li>focus() / blur() : 활성화 되었을 때 / 포커스를 잃었을 때 : 단일 명령어로도 사용가능</li>
-    <li>keypress() / keydown() : 키눌렀을 때(특수키x, 대소문자 구분 / 대문자로만 인식, 특수키)</li>
-    <li>keyup() : 키를 떼었을 때</li>
-    <li>scroll() : 스크롤 했을 때</li>
-    <li>change() : value 값이 변경 되었을 때</li>
-    <li>resize() : 윈도우(document, window) 사이즈가 변경되었을 때</li>
-    <li>on() : 이벤트리스너, 여러개의 이벤트 중복해서 걸거나, 동적요소에 이벤트를 걸때</li>
-    <li>off() : 이벤트 제거</li>
+  <li>load() : 선택자의 자손을 포함한 외부소그가 로딩이 완료된 후 이벤트 발생</li>
+  <li>ready() : 선택자의 html요소만 로딩되면 바로 실행</li>
+  <li>이벤트(렌더링) 순서 : DOM생성 > ready() > 렌더링(화면표현) > 외부소스 다운 > load()</li>
+  <li>click() / dblclick : 클릭/더블클릭</li>
+  <li>mousemove() / mouseover : 마우스가 움직일때/ 마우스 올렸을 때</li>
+  <li>mouseout() / mousedown() : 마우스가 벗어났을 때 / 마우스 눌렀을 때</li>
+  <li>focus() / blur() : 활성화 되었을 때 / 포커스를 잃었을 때 : 단일 명령어로도 사용가능.</li>
+  <li>keypress() / keydown() : 키눌렀을 때(특수키x, 대소문자 구분 / 대문자로만 인식, 특수키)</li>
+  <li>keyup() : 키를 떼었을 때</li>
+  <li>scroll(): 스크롤 했을 때</li>
+  <li>change() : value 값이 변경 되었을 때</li>
+  <li>resize() : 윈도우(document, window)사이즈가 변경되었을 때</li>
+  <li>on() : 이벤트리스너, 여러개의 이벤트중복해서 걸거나, 동적요소에 이벤트를 걸때</li>
+  <li>off() : 이벤트 제거</li>
 </ul>
 <h2>효과 및 애니메이션</h2>
 <ul>
-    <li>hide() / show() / toggle() : 숨김/보임/토글</li>
-    <li>fadeIn() / fadeOut() / fadeToggle : 부드럽게 입장/퇴장/토글</li>
-    <li>slideUp() / slideDown() / slideToggle()</li>
-    <li>animate() :애니메이션 적용
-        <ul>
-            <li>일반메서드(함수)는 거의 동시에 순차실행이지만 모션함수는 앞에 실행한 모션이 완료된 후에 실행</li>
-            <li>delay() : 모션함수들의 지연실행</li>
-            <li>stop() : 모션함수 정지, video/audio의 정지</li>
-            <li>clearQueue() : 큐(명령어 대기상태)에 대기중인 모션을 삭제</li>
-            <li>콜백함수를 활용하여 모션이후의 동작 구현 가능</li>
-        </ul>
-    </li>
+  <li>hide() / show() / toggle() : 숨김/보임/토글</li>
+  <li>fadeIn() : 부드럽게 입장</li>
+  <li>fadeOut() :</li>
+  <li>영화제목을 클릭하면 영화포스터가 토글되게....</li>
+  <li></li>
 </ul>
 <button>fadeIn()</button>
 <button>fadeOut()</button>
 <button>fadeToggle()</button>
-<button>slidToggle()</button>
-<div id="ex"></div>
-<button>회전</button>
-<button>이동</button>
-<img src="img/car.png" alt="자동차" id="car">
+<div id="ex">
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $("button").eq(0).click(function(){
-        $("#ex").fadeIn();
-    })
-    $("button").eq(1).click(function(){
-        $("#ex").fadeOut();
-    })
-    $("button").eq(2).click(function(){
-        $("#ex").fadeToggle();
-    })
-    $("button").eq(3).click(function(){
-        $("#ex").slideToggle();
-    })
-
-    $("button").eq(4).click(function(){
-        $("#car").animate({rotate : "30deg"},500)
-    })
-    // 문제) 자동차가 화면 오른쪽 끝으로 이동
-    var x = $(document).width() - $("#car").width();
-    var y = $(window).height() - $("#car").height();
-    $("button").eq(5).click(function(){
-        $("#car").animate({left: x},1000)
-        $("#car").delay(2000)
-        $("#car").animate({rotate: "90deg"},200)
-        $("#car").animate({top: y},1000)
-        $("#car").animate({rotate: "180deg"},200)
-        $("#car").animate({left: 0},1000)
-        $("#car").animate({rotate: "270deg"},200)
-        $("#car").animate({top: 0},1000)
-        $("#car").animate({rotate: "360deg"},200,function(){
-            $("#car").css("rotate", "0deg")
-        })
-    })
-</script>
+</div>
 </body>
+<script>
+  // fadeIn()
+  $("button").eq(0).click(function(){
+    $("#ex").fadeIn(1000);
+  })
+  // fadeOut()
+  $("button").eq(1).click(function(){
+    $("#ex").fadeOut(1000);
+  })
+  // fadeOut()
+  $("button").eq(2).click(function(){
+    $("#ex").fadeToggle(1000);
+  })
+
+
+</script>
 </html>
