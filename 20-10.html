@@ -11,7 +11,7 @@
         #stage {border:1px solid gray; width:300px; height: 300px; margin:50px auto; 
             background: linear-gradient(90deg,#ccc 1px, transparent 1px) left/10px 10px, 
             linear-gradient(180deg,#ccc 1px,transparent 1px)
-            top/10px 10px; position: relative;}
+            top/10px 10px; position: relative; border-bottom:1px solid #ccc; border-right:1px solid #ccc;}
         #stage>[id] {position: absolute; width:100%; height: 100%;}
         #snake span {width:10px; height:10px; background: #333; position: absolute; left:50px; top:50px}
         #snake span:last-child {box-shadow: 0 0 0 5px #333; border-radius: 50%;}
@@ -27,7 +27,7 @@
         #snake span:first-child.right {border-radius:10px 0 0 10px;}
         #snake span:first-child.left {border-radius:0 10px 10px 0;}
         #snake span:first-child.top {border-radius:10px 0 0 10px;}
-        #snake span:first-child.right {border-radius:10px 0 0 10px;}
+        #snake span:first-child.bottom {border-radius:10px 0 0 10px;}
         #items span {font-size:14px; transform: translate(-4px,-5px); position:absolute;}
 </style>
 <body>
@@ -71,10 +71,26 @@
         $("#snake").append("<span></span>");
         $("#snake").addClass(dir)
         $("#snake span:last").css({left:x+"px", top:y+"px"});
-        if(x !=$("#items span").offset().left || y != $("#items span").top) {
-        $("#snake span:first").remove();
+        
+        // 아이템 먹을시 꼬리 늘어나기
+        if(x !=$("#items span").position().left || y != $("#items span").position().top) {
+            $("#snake span:first").remove();
         }
-        $("#snake span:first").addClass($("#snake span").eq(1).attr("class"))
+        $("#snake span:first").addClass($("#snake span").eq(1).attr("class"));
+        // 죽는 경우
+        // - 벽에 닿으면
+        // - 몸에 닿으면
+        var check1 = x < 0 || x > 390 || y < 0 || y > 290;
+        var check2 = $("#snake span:first");
+
+        if (check1 || check2) {
+
+        }
+        if(x<0 || x>290 || y<0 || y>290 || $("#snake span:last").hasClass($("#snake span").eq(1).attr("class"))) {
+            console.log("Game Over!");
+            //clearInterval(interval);
+        }
+
     }
 
     $(document).keydown(function(e) {
