@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<h1>RPG 게임 따라하기</h1>
+<h1>RPG 게임 따라하기</h1>    
 <div id="stage">
     <div id="char"></div>
     <img src="img/tr_close.png" id="tr">
@@ -41,23 +41,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-<<<<<<< HEAD
-  var x=0, y=0;   // 캐릭터의 좌표값
-  var x_max = $("#stage").width() - $("#char").width();
-  var y_max = $("#stage").height() - $("#char").height();
-  var score = 0;
-  var play = false;
-  var audio = new Audio("coin.mp3")
-
-  // 오른쪽 키 눌렀을 때 10px씩 움직이게 박스범위안에서
-  $(document).keydown(function(e) {
-    if(play) {
-        // 오른쪽(39)
-        if (e.keyCode == 39 && x < x_max) {
-            x += 10
-            if(x > x_max) { x = x_max; }
-            else { 
-=======
     var x=0, y=0; // 캐릭터의 좌표값
     var x_max = $("#stage").width() - $("#char").width();
     var y_max = $("#stage").height() - $("#char").height();
@@ -73,10 +56,7 @@
                 x+=10;
                 if(x > x_max) x=x_max;  // 스테이지 끝에 정확하게 걸리게
                 $("#char").css("left",x+"px");
->>>>>>> e9546cad2c46044efac11c612c2616ac7bddff72
                 $("#char").removeAttr("class");
-                $("#char").css("left", x+"px"); 
-
                 $("#char").addClass("right");
                 $("#char").css("background-position-x","+="+86+"px");
             }
@@ -97,22 +77,6 @@
                 if(y > y_max) y=y_max;
                 $("#char").css("top",y+"px")
                 $("#char").removeAttr("class");
-<<<<<<< HEAD
-                $("#char").css("top", y+"px"); 
-                $("#char").addClass("bottom");
-                $("#char").css("background-position-x","+="+86+"px")
-            }
-        }
-        // 위(38)
-        if (e.keyCode == 38 && y > 0) {
-            y -= 10
-            if(y < 0) { y = 0; }
-            else {
-                $("#char").removeAttr("class");
-                $("#char").css("top", y+"px");
-                $("#char").addClass("top");
-                $("#char").css("background-position-x","-="+86+"px")
-=======
                 $("#char").addClass("bottom");
                 $("#char").css("background-position-x","+="+86+"px");
             }
@@ -143,8 +107,7 @@
                 }
                 // 보물상자 열기
                 $("#tr").attr("src","img/tr_open.png");
->>>>>>> e9546cad2c46044efac11c612c2616ac7bddff72
-            }
+            } 
         }
     })
 
@@ -154,70 +117,13 @@
     var tr_x;
     var tr_y;
 
-<<<<<<< HEAD
-        if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50) {
-            if($("#tr").attr("src") == "img/tr_close.png") {
-                audio.play();
-                score += 100;
-                $("#score").text(score)
-                // 문제) 1초후 새 보물상자 나오게
-                setTimeout(ranTr, 1000);
-            }
-            $("#tr").attr("src","img/tr_open.png");
-        }
-=======
     function ranTr() {
         $("#tr").attr("src","img/tr_close.png")
         tr_x = parseInt(Math.random()*($("#stage").width()-$("#tr").width()));
         tr_y = parseInt(Math.random()*($("#stage").height()-$("#tr").height()));
         $("#tr").css({left:tr_x, top:tr_y});
->>>>>>> e9546cad2c46044efac11c612c2616ac7bddff72
     }
 
-<<<<<<< HEAD
-  // 보물상자 랜덤으로 나오게
-  var tr_x;
-  var tr_y;
-  
-  function ranTr() {
-    $("#tr").attr("src","img/tr_close.png");
-    tr_x = parseInt(Math.random()*($("#stage").width()-$("#tr").width()));
-    tr_y = parseInt(Math.random()*($("#stage").height()-$("#tr").height()));
-    $("#tr").css({left:tr_x, top:tr_y})
-  }
-
-  // 시작 버튼
-  $("#start_bt").click(function() {
-    audio.play();  
-    play = true;
-      $(this).hide();
-      ranTr();
-      $("#time").addClass("play");
-
-      // 10초후 엔딩화면 나오게
-      setTimeout(function(){
-        $("#ending span").text(score);
-        $("#ending").fadeIn("fast");
-        play = false;
-        },10000)
-  });
-
-  // REPLAY 버튼
-  $("#ending button").click(function() {
-      $(this).parent().hide();  //엔딩화면 닫기
-      score = 0;
-      $("#score").text(score); // 점수 초기화
-      $("#time").removeClass("play");
-      play = true;
-      ranTr();
-      $("#time").addClass("play");
-      setTimeout(function(){
-          $("#ending span").text(score);
-          $("#ending").fadeIn("fast");
-          play = false;
-      },10000);
-  });
-=======
     // 시작하기 버튼
     $("#start_bt").click(function(){
         play = true;
@@ -247,7 +153,6 @@
         },10000)
     })
 
->>>>>>> e9546cad2c46044efac11c612c2616ac7bddff72
 </script>
 </body>
 </html>
