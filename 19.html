@@ -45,6 +45,7 @@
   var y_max = $("#stage").height() - $("#char").height();
   var score = 0;
   var play = false;
+  var audio = new Audio("coin.mp3")
 
   // 오른쪽 키 눌렀을 때 10px씩 움직이게 박스범위안에서
   $(document).keydown(function(e) {
@@ -54,9 +55,9 @@
             x += 10
             if(x > x_max) { x = x_max; }
             else { 
-                
-                $("#char").css("left", x+"px"); 
                 $("#char").removeAttr("class");
+                $("#char").css("left", x+"px"); 
+
                 $("#char").addClass("right");
                 $("#char").css("background-position-x","+="+86+"px")
             }
@@ -79,7 +80,7 @@
             else { 
                 $("#char").removeAttr("class");
                 $("#char").css("top", y+"px"); 
-                $("#char").addClass("top");
+                $("#char").addClass("bottom");
                 $("#char").css("background-position-x","+="+86+"px")
             }
         }
@@ -90,7 +91,7 @@
             else {
                 $("#char").removeAttr("class");
                 $("#char").css("top", y+"px");
-                $("#char").addClass("bottom");
+                $("#char").addClass("top");
                 $("#char").css("background-position-x","-="+86+"px")
             }
         }
@@ -105,6 +106,7 @@
 
         if (Math.abs(xCenter - trxCenter) < 50 && Math.abs(yCenter - tryCenter) < 50) {
             if($("#tr").attr("src") == "img/tr_close.png") {
+                audio.play();
                 score += 100;
                 $("#score").text(score)
                 // 문제) 1초후 새 보물상자 나오게
@@ -128,7 +130,8 @@
 
   // 시작 버튼
   $("#start_bt").click(function() {
-      play = true;
+    audio.play();  
+    play = true;
       $(this).hide();
       ranTr();
       $("#time").addClass("play");
@@ -143,10 +146,19 @@
 
   // REPLAY 버튼
   $("#ending button").click(function() {
-    location.reload();
+      $(this).parent().hide();  //엔딩화면 닫기
+      score = 0;
+      $("#score").text(score); // 점수 초기화
+      $("#time").removeClass("play");
+      play = true;
+      ranTr();
+      $("#time").addClass("play");
+      setTimeout(function(){
+          $("#ending span").text(score);
+          $("#ending").fadeIn("fast");
+          play = false;
+      },10000);
   });
-  
-
 </script>
 </body>
 </html>

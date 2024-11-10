@@ -25,7 +25,6 @@ function updateUserScore(score) {
 
     let userScoreElem = document.getElementById('userScore');
     userScoreElem.innerHTML = userScore;
-
 }
 
 function disableComputerButtons(flag) {
