@@ -4,32 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아바타 시스템 구현하기</title>
+    <style>
+        * {margin:0; padding:0; list-style:none;}
+        h1 {padding:50px; text-align: center;}
+        img{width:130px; height: 130px;}
+        #char {border:1px dashed gray; width:328px; height:328px; margin:50px auto; background:url(img/bg01.png) center/cover; position:relative;}
+        #char img {display: block; width:100%; height:auto;}
+        #char img.top {position: absolute; width: 159px; left: 50%;  top:120px; transform: translateX(-50%);}
+        #bt {display: flex; gap:10px; justify-content: center; margin-bottom: 20px;}
+        #bt li {padding:5px 10px; background: #ccc; color:#333; cursor:pointer;}
+        #bt li.on {background:#333; color:#ccc}
+        .pic {display: flex; justify-content: center; flex-wrap: wrap;}
+        .pic:not(#top) {display: none;}
+    </style>
 </head>
 <body>
 <h1>아바타 시스템 구현하기</h1>
 <section id="game">
-    <img src="img/bg01.png">
-    <img src="img/109_char.png">
-    <ul>
-        <li>상의</li>
+    <!-- <img src="img/bg01.png"> -->
+    <div id="char">
+        <img src="img/109_char.png">
+        <img src="img/top02.png" class="top">
+    </div>
+
+    <ul id="bt">
+        <li class="on">상의</li>
         <li>하의</li>
         <li>아이템1</li>
         <li>아이템2</li>
         <li>배경</li>
     </ul>
 
-    <div id="top">
-        <img src="img/109_none.png">
-        <img src="img/top02.png">
-        <img src="img/top03.png">
-        <img src="img/top04.png">
-        <img src="img/top05.png">
-        <img src="img/top06.png">
-        <img src="img/top07.png">
-        <img src="img/top08.png">
+    <div id="top" class="pic">
+        <img src="img/109_none.png" class="top">
+        <img src="img/top02.png" class="top">
+        <img src="img/top03.png" class="top">
+        <img src="img/top04.png" class="top">
+        <img src="img/top05.png" class="top">
+        <img src="img/top06.png" class="top">
+        <img src="img/top07.png" class="top">
+        <img src="img/top08.png" class="top">
     </div>
 
-    <div id="pants">
+    <div id="pants" class="pic">
+        <img src="img/109_none.png">
         <img src="img/pants01.png">
         <img src="img/pants02.png">
         <img src="img/pants03.png">
@@ -37,10 +55,11 @@
         <img src="img/pants05.png">
     </div>
 
-    <div id="item1">
+    <div id="item1" class="pic">
+        <img src="img/109_none.png">
         <img src="img/item1_01.png">
         <img src="img/item1_02.png">
-        <img src="img/item1_03.png">
+        <img src="img/item1_03.png" class="item1 item1-1">
         <img src="img/item1_04.png">
         <img src="img/item1_05.png">
         <img src="img/item1_06.png">
@@ -48,7 +67,8 @@
         <img src="img/item1_08.png">
     </div>
 
-    <div id="item2">
+    <div id="item2" class="pic">
+        <img src="img/109_none.png">
         <img src="img/item2_01.png">
         <img src="img/item2_02.png">
         <img src="img/item2_03.png">
@@ -59,7 +79,8 @@
         <img src="img/item2_08.png">
     </div>
 
-    <div id="bg">
+    <div id="bg" class="pic">
+        <img src="img/109_none.png">
         <img src="img/bg01.png">
         <img src="img/bg02.png">
         <img src="img/bg03.png">
@@ -72,7 +93,40 @@
     </div>
     <button>나만의 백구 완성!</button>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // 카테고리 기능
+    $("#bt li").click(function() {
+        var menu = $("#bt li").index($("this"));
+        //alert(menu);
+        $(".pic").hide();
+        $(".pic").eq(menu).css("display","flex");
+        $(".on").removeClass("on");
+        $(this).addClass("on");
+    })
+    // 아이템 적용
+    $(".pic img:not(:first-child)").click(function() {
+        var menu = $("#bt li").index($(".on"));
+        var img=$(this).attr("src");
+        if (menu == 4) {
+            $("#char").css("background-image","url("+img+")");
+        } else if (menu==0){
+            $("#char .top").remove();
+            $("#char").append($(this).clone());
+        } else if (menu==1){
+            $("#char .pants").remove();
+            $("#char").append($(this).clone());
+        } else if (menu==2){
+            $("#char .item1").remove();
+            $("#char").append($(this).clone());
+        } else if (menu==3){
+            $("#char .item2").remove();
+            $("#char").append($(this).clone());
+        }
+
+
+    })
+</script>
 </body>
 </html>
 
-Message #일반
