@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>Insert title here</title>
+<style type="text/css">
+table{
+	border-spacing: 1px;
+	border-collapse: collapse;
+	border: 1px solid #000;
+}
+td{
+	width: 20px;
+	height: 20px;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		var rows = $('table').find('tr').length; //맵의 총 행
+		var cols = $($('table').find('tr')[0]).find('td').length; //맵의 총 열
+		var nowRow = rows/2; //초기위치
+		var nowCol = cols/2; //초기위치
+		var interVal; //인터발함수
+		var nowLen = 4; //지렁이 길이
+		var check = 0;  //이동시 꽁무니 인식 카운트 제일크면 머리부분 작으면 삭제부분
+		var eat = true; //먹이 생성여부
+		var eatPos = 0;//먹이 위치
+		var speed = 600;//초기 속도
+		
+		$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).css('background','red');
+		
+		//맵 확인하며 지렁이 와 먹이 그리는 함수
+		function createUser(){
+			var lenCnt = 0;
+			var nums = new Array();
+			
+			$('td').each(function(i){
+				if($(this).attr('data')=='1'){
+					$(this).css('background','#000');
+					nums.push(parseInt($(this).attr('check')));
+					lenCnt++;
+				}else if ($(this).attr('eat')=='1'){
+					$(this).css('background','red');
+				}else{
+					$(this).css('background','#fff');
+				}
+			});
+			
+			nums = maxsort(nums);
+			$('td').each(function(i){
+				if($(this).attr('check')!=null&&$(this).attr('check')==nums[0]){
+					$(this).css('background','red');
+				}
+			});
+			
+			if(lenCnt > nowLen){
+				nums = minsort(nums);
+				$('td').each(function(i){
+					if($(this).attr('check')==nums[0]){
+						$(this).attr('data','0');
+						$(this).attr('check',null);
+					}
+				});
+			}
+		}
+		
+		//지렁이 먹이 이벤트
+		function userEat(){
+			if(eat){
+				while(true){
+					var target = Math.floor(Math.random() * $('td').length) + 1;
+					if($($('td')[target]).attr('data')!='1'){
+						$($('td')[target]).attr('eat','1');
+						eat = false;
+						eatPos = target;
+						break;
+					}
+				}
+			}else{
+				var eatck = false;
+				$('td').each(function(i){
+					if($(this).attr('eat')=='1'){
+						eatck = true;
+						}
+					});
+				if(!eatck){
+					eat = true;
+				}else{
+					if($($('td')[eatPos]).attr('data')=='1'){
+						$($('td')[eatPos]).attr('eat',null);
+						eat = true;
+						$('#score').text(parseInt($('#score').text())+100);
+						nowLen++;
+						$('#length').text(nowLen);
+						if(speed>400){
+							speed -= 20;						
+						}else{
+							speed -= 10;
+						}
+						$('#speed').text(speed);
+						eatPos = 0;
+					}
+				}
+			}
+		}
+		
+		//꼬리 찾기위한 오름차순 정렬
+		function minsort(nums){
+			for(var i = 0 ; i < nums.length ; i ++){
+				for(var k = 0 ; k < nums.length-1 ; k ++){
+					if(parseInt(nums[k])>parseInt(nums[k+1])){
+						var a = nums[k];
+						nums[k] = nums[k+1];
+						nums[k+1] = a;
+					}
+				}	
+			}
+			return nums;
+		}
+		
+		//머리찾기위한 내림차순 정렬
+		function maxsort(nums){
+			for(var i = 0 ; i < nums.length ; i ++){
+				for(var k = 0 ; k < nums.length-1 ; k ++){
+					if(parseInt(nums[k])<parseInt(nums[k+1])){
+						var a = nums[k];
+						nums[k] = nums[k+1];
+						nums[k+1] = a;
+					}
+				}	
+			}
+			return nums;
+		}
+		
+		$('#up').click(function(){
+			move('up');
+		});
+		$('#down').click(function(){
+			move('down');
+		});
+		$('#left').click(function(){
+			move('left');
+		});
+		$('#right').click(function(){
+			move('right');
+		});
+		
+		//키보드이벤트
+		$(document).keydown(function(event){
+			switch(event.keyCode){
+				//left
+				case 37:
+					move('left');
+					break;
+				//up	
+				case 38:
+					move('up');
+					break;
+				//right
+				case 39:
+					move('right');
+					break;
+				//down
+				case 40:
+					move('down');
+					break;
+			}
+			
+		});
+		
+		//각 키입력시 수행할 함수
+		function move(status){
+			if(interVal != null){
+				clearInterval(interVal);
+			}
+			if(status == 'up'){
+				interVal = setInterval(function(){
+					if(nowRow>0){
+						nowRow--;
+					}
+					if(nowRow == 0 || $($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data')=='1'){
+						alert('게임오버 점수 : '+ $('#score').text());
+						location.reload();
+					}
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data','1');
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('check',check++);
+					createUser();
+					userEat();
+				},speed);
+			}else if(status == 'down'){
+				interVal = setInterval(function(){
+					if(nowRow<rows){
+						nowRow++;
+					}
+					if(nowRow == rows+1 || $($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data')=='1'){
+						alert('게임오버 점수 : '+ $('#score').text());
+						location.reload();
+					}
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data','1');
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('check',check++);
+					createUser();
+					userEat();
+				},speed);
+			}
+			else if(status == 'left'){
+				interVal = setInterval(function(){
+					if(nowCol>0){
+						nowCol--;
+					}
+					if(nowCol==0 || $($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data')=='1'){
+						alert('게임오버 점수 : '+ $('#score').text());
+						location.reload();
+					}
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data','1');
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('check',check++);
+					createUser();
+					userEat();
+				},speed);
+			}
+			else if(status == 'right'){
+				interVal = setInterval(function(){
+					if(nowCol<cols){
+						nowCol++;
+					}
+					if(nowCol==cols+1 || $($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data')=='1'){
+						alert('게임오버 점수 : '+ $('#score').text());
+						location.reload();
+					}
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('data','1');
+					$($($('table').find('tr')[nowRow-1]).find('td')[nowCol-1]).attr('check',check++);
+					createUser();
+					userEat();
+				},speed);
+			}
+			
+		}
+		
+	});	
+</script>
+</head>
+<body>
+<center>
+방향키를 누르면 시작합니다.
+<div>
+속도 : <span id = "speed">600</span> 
+점수 : <span id = "score">0</span> 
+길이 : <span id = "length">4</span> 
+</div>
+</center>
+<table align="center">
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+</table>
+<center>
+<button id="up">↑</button><br>
+<button id="left">←</button>
+<button id="down">↓</button>
+<button id="right">→</button>
+</center>
+</body>
+</html>
