@@ -71,14 +71,21 @@
         if(x!=$("#items span").position().left || y!=$("#items span").position().top) {
             $("#snake span:first").remove();
         }
-        $("#snake span:first").attr("class",$("#snake span").eq(1).attr("class"))
-
-        // 죽는 경우?
-        // - 벽에 닿으면 (머리의 좌표가 스테이지 밖으로 나가면)
+        $("#snake span:first").attr("class",$("#snake span").eq(1).attr("class"));
         var check1 = x<0 || x > 390 || y<0 || y > 290;
-        console.log(check1)
-        // - 몸(span)에 닿으면 : #snake span과 머리가 닿으면
-        var check2 ;
+
+        // 몸갯수(span)
+        var body = $("snake span").length -1;  //머리제외
+        for(var i = 0; i < body; i++) {
+
+            let check2 = $("#snake span").eq(i).position().left == x &&
+            $("#snake span").eq(i).position().top == y;
+            console.log($("#snake span").eq(i).position().left+" : "+ x);
+
+            if(check2) break;
+        }
+
+        
 
         // 과제) 조건2 완성하기, 개인 웹게임 완성하기
         if(check1 || check2) {
