@@ -77,7 +77,15 @@
         $("header .fa").toggleclass("fa-times");
     })
     // 메인메뉴 기능
-    $("")
+    $("header li").click(function(){
+        var menu = $("header li").index(this);
+        var move = $("section").eq(menu).offset().top;
+        $("html").animate({
+            scrollTop:move
+        },500)
+        $("header ul").removeClass("on");
+        return false;
+    })
 
 </script>
 </body>
