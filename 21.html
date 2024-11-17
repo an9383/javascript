@@ -7,8 +7,42 @@
 </head>
 <body>
 <h1>비동기통신(Ajax)</h1>
+
 <h2>자바스크립트</h2>
-<button>데이터 불러오기</button>
+<button id="bt">데이터 불러오기</button>
 <div id="result"></div>
+
+<h2>jQuery</h2>
+<button id="bt2">데이터 불러오기</button>
+<div id="result2"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // jQuery 버전
+    $("bt2").click(function(){
+        $.ajax({
+            url : "data.json",
+            type : "GET",
+            dataType : "json",
+            success : function(data){
+                $("#result2").text(data.message)
+            },
+            error : function(){
+                alert("데이터 불러오는 중 오류입니다.")
+            }
+        })
+    })
+    // 자바스크립트 버전
+    document.querySelector("#bt").onclick = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET","data.json", true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.querySelector("#result").innerText = response.message;
+            }
+        }
+        xhr.send();  // 서버로 전송되어 통신 시작을 요청하는 메서드
+    }
+</script>
 </body>
 </html>

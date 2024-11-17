@@ -3,9 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>명언 API 활용하기</title>
+    <style>
+        nav {border: 1px dashed #ccc; padding:20px;
+        transition:ease all .3s; display:flex;
+        justify-content: center; gap:10px;}
+        nav input, nav button, nav span {display:none}
+        #list li {display:flex; justify-content: space-between; padding: 3px 2px;}
+        #list li:nth-child(odd) {background: #ddd;}
+        #list li span {color:#999;}
+    </style>
 </head>
 <body>
+<h1>추천 명언</h1>
+<nav>
+<select>
+        <option>-- 카테고리 --</option>
+        <option >건강과 행복</option>
+        <option >도전과 격언</option>
+        <option >사랑과 우정</option>
+        <option >시간</option>
+        <option >인간관계</option>
+        <option >자기개발</option>
+        <option >지혜와 가치</option>
+        <option >창의성과 영감</option>
+</select>
+<!-- 165, 241, 48, 29, 47, 211, 154, 27-->
+<input type="range" min="3" max="10"> <span>5</span>
+<button>추천받기</button>
+</nav>
+<ul id="list">
+    <li>명언 나오는 곳~</li>
+</ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // 카테고리별 갯수 적용하기
+    var total = [165, 241, 48, 29, 47, 211, 154, 27];
+    $("select").change(function(){
+        var n = $("option").index($("option:selected"));
+        $("input").attr("max", total[n-1]);
+        $("input, input+span").fadeIn();
+    })
+
+    // 현재 갯수 실시간 표현하기
+    // $("input").change(function(){
+    //     $("span").text($(this).val());
+    // })
+
+    $("input").on("change", function(){ //이벤트 대신에 대상만 써주면 모든 이벤트에서 작동함!
+        $("input+span").text($(this).val());
+        console.log("이벤트 발생");
+        $("button").fadeIn();
+    })
+
+    $("button").click(function(){
+        $("#list").empty();
+        loadAPI();
+    })
     
+    function loadAPI(){
+        var cate = $("select").val();
+        var count = $("input").val();
+        $.ajax({
+            url : "https://ljj.kr/tool/api.php?category="+cate+"&count="+count,
+            type : "GET",
+            dataType : "json",
+            success : function(data){
+                data.forEach(function(item){
+                    $("#list").append("<li>"+item.text+" ["+item.author+"]</li>")
+                });
+                
+            },
+            error : function(){
+                alert("데이터 불러오는 중 오류입니다.")
+            }
+        })
+    }
+</script>
 </body>
 </html>

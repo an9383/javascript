@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인메뉴(클릭+현재메뉴)</title>
+    <style>
+        * {margin:0; padding:0; list-style: none;}
+        h1 {position: fixed;z-index: 100;font-size:12px;}
+        h2 { text-align: center; padding: 100px}
+        nav {position: fixed;background:#eee;top:0;width:100%; text-align: center;}
+        nav ul {display: inline-flex; ;margin:20px; min-width:400px;justify-content: center;}
+        nav li {padding:10px;flex:1;}
+        nav li:hover, nav li.on {font-weight:bold;cursor: pointer;}
+        nav a {text-decoration: none; color:#000;}
+        section {border:2px solid red; box-sizing: border-box; min-height:100vh;}
+        #page ul {position: fixed; right:20px;top:50%; transform: translateY(-50%); display: flex; flex-direction: column; gap:20px;width:30px;align-items: center;}
+        #page li {background:#ccc;border-radius:100px;text-indent: -9999px; overflow: hidden;width:15px; height:15px; cursor: pointer;transition: ease all .3s;}
+        #page li:hover {background:#333}
+        #page li.on {width:30px; background:#333;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="01.html">메인메뉴(클릭+현재메뉴)</a></h1>
+        <nav>
+            <ul>
+                <li class="on"><a href="#home">Home</a></li>
+                <li><a href="#port">Portfolio</a></li>
+                <li><a href="#pro">Profile</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="page"></div>
+    </header>
+    <main>
+        <section id="home" class="menu">
+            <h2>Home</h2>
+        </section>
+        <section id="port" class="menu">
+            <h2>Portfolio</h2>
+        </section>
+        <section id="pro" class="menu">
+            <h2>Profile</h2>
+        </section>
+        <section id="contact" class="menu">
+            <h2>Contact</h2>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // 메뉴 링크기능
+    $("nav a").click(function(){
+        console.log("클릭함");
+        var menu = $("nav a").index(this);
+        var move = $(".menu").eq(menu).offset().top;  //이동할 값
+        $(".on").removeClass("on");
+        $(this).parent().addClass("on");
+        $("html").animate({
+            scrollTop: 1500
+    },500)
+    return false;
+});
+
+// 스크롤 이벤트
+var h = $(window).height()/2; 
+$(window).scroll(function(){
+    var t = $(this).scrollTop();
+    $("#page .on").removeClass("on");
+    if(t < $(".menu").eq(1).offset().top - h) {
+        $("#page li").eq(0).addClass("on");
+    } else if(t < $(".menu").eq(2).offset().top - h) {
+        $("#page li").eq(1).addClass("on");
+    } else if($(".menu").eq(3).offset().top - h) {
+        $("#page li").eq(2).addClass("on");
+    } else {
+        $("#page li").eq(3).addClass("on");
+    }
+})
+
+// 페이지네이션 생성(메뉴복사)
+$("#page").append($("nav ul").clone());
+// $("#page").html($("nav").html())
+    
+</script>
+</body>
+</html>
