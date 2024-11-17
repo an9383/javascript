@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거메뉴(메인메뉴 반응형 처리)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {margin:0; padding:0; list-style:none;}
+        .screen_out {display: none;}
+        header {background: #eee;}
+        header>div {display: flex; justify-content: space-between; margin:auto; min-height:100px;align-items: center; max-width:1000px}
+        header h1 {position: fixed;top:50%; left:50%; transform:translate(-50%,-50%); width:100%; text-align: center;}
+        header button {display: block; font-size:21px; width:26px; height:26px; cursor: pointer; color:#666; border:none; display: none; background:transparent}
+        header button:hover {color:#333}
+        header ul {display: flex;}
+        header ul.on {right:0;}
+        header a {display: block;padding:10px 20px; text-decoration: none;font-weight: bold;color:#666; font-size:22px;}
+        header a:hover {color:#333;}
+
+        section { min-height:100vh;}
+        section:nth-child(odd) {background:#666;}
+
+
+        /* 반응형웹 */
+        @media (max-width:1000px) { 
+            header {padding:0 0 0 20px;}
+            header a {font-size:18px;}
+        }
+        @media (max-width:580px) {
+            header {padding:0 20px;}
+            header ul {position: fixed;right:-100%; top:0;width:100%; height:100%; background:rgba(0, 0, 0, .85);backdrop-filter: blur(10px);transition: ease all .3s; display: flex; flex-direction: column; justify-content: center;align-items: center; transition: ease all .3s;}
+            header ul.on {right:0;}
+            header a {font-size:24px;position: relative;}
+            header a:hover {color: #eee;}
+            header a::after {content:"";border-bottom:2px solid #666;width:0;position: absolute;left:50%; bottom:10px;transition: ease all .3s;transform: translateX(-50%);}
+            header a:hover::after {width:calc(100% - 40px)}
+            header button {display: block;position: absolute;right:20px; top:40px; }
+            header button:hover {color:#333;}
+            header ul.on + button:hover {color:#eee;}
+            
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>햄버거메뉴(메인메뉴 반응형 처리)</h1>
+    <div>
+        <h2>로고</h2>
+        <nav>
+            <h2 class="screen_out">주요 서비스</h2>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#port">PORTFOLIO</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+            <button><i class="fa fa-bars" aria-hidden="true"></i><span class="screen_out">MENU</span></button>
+        </nav>
+    </div>
+    <i class="fa fa-times" aria-hidden="true"></i>
+    
+</header>
+<main>
+    <section id="home">home</section>
+    <section id="port">port</section>
+    <section id="about">about</section>
+    <section id="contact">contact</section>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+    // 햄버거 버튼(모바일 버튼)
+    $("nav button").click(function(){
+        $("header ul").toggleClass("on");
+        $("header .fa").toggleclass("fa-bars");
+        $("header .fa").toggleclass("fa-times");
+    })
+    // 메인메뉴 기능
+    $("")
+
+</script>
+</body>
+</html>
