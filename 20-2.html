@@ -8,28 +8,27 @@
         * {margin:0; padding:0; list-style: none;}
         h1 {padding:50px; text-align: center;}
         #q {padding:20px;}
-        #q li {display: flex; gap:10px; flex-wrap: wrap; 
-            justify-content: center;}
+        #q li {display: flex; gap:10px; flex-wrap: wrap; justify-content: center;}
         #q li:not(:first-child) {display: none;}
         #q li:nth-child(2) {border:5px solid red}
         #q li:nth-child(3) {border:5px solid green}
-        #q img {width: 400px;}
+        #q img {width:400px }
     </style>
 </head>
 <body>
-   <h1>틀린그림 찾기</h1>
+<h1>틀린그림 찾기</h1>
 <ul id="q">
-    <li data-correct="[[50,80],[205,125],[300,400]]">
-        <img src="img/20-2-1.jpg" >
-        <img src="img/20-2-2.jpg" >
+    <li data-correct="[[50,80], [205,125], [380,305]]">
+        <img src="img/20-2-1.jpg">
+        <img src="img/20-2-2.jpg">
     </li>
-    <li data-correct="[[50,80],[205,125],[300,400]]">
-        <img src="img/20-2-1.jpg" >
-        <img src="img/20-2-2.jpg" >
+    <li data-correct="[[50,80], [205,125], [380,305]]">
+        <img src="img/20-2-1.jpg">
+        <img src="img/20-2-2.jpg">
     </li>
-    <li data-correct="[[50,80],[205,125],[300,400]]">
-        <img src="img/20-2-1.jpg" >
-        <img src="img/20-2-2.jpg" >
+    <li data-correct="[[50,80], [205,125], [380,305]]">
+        <img src="img/20-2-1.jpg">
+        <img src="img/20-2-2.jpg">
     </li>
 </ul>
 <nav>
@@ -38,33 +37,32 @@
     <button id="next">다음</button>
     <button>힌트</button>
 </nav>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    // var correct = [eval("["+$("#q li").eq(0).attr("data-correct")+"]")];
     
-    // var correct = [[50,80],[205,125]];
-     // alert(correct[1]);
-     // console.log(correct);
+    // console.log(correct);
     $("img").click(function(e) {
-        var correct = JSON.parse($(this).parent().attr("data-correct")); //eval은 스크립트를 명령어로 인식함.
-        console.log("이미지의 클릭 위치값:"+e.offsetX+", "+e.offsetY);
+        var correct = JSON.parse($(this).parent().attr("data-correct"));
+        console.log("이미지의 클릭 위치값 : "+e.offsetX+", "+e.offsetY)
         // 정답처리
-        for(var i =0; i<correct.length; i++) {
+        for(var i=0; i<correct.length; i++) {
             if(Math.abs(correct[i][0] - e.offsetX) < 30 && Math.abs(correct[i][1] - e.offsetY) < 30) {
-            alert(i+1+"문제 정답");
+                console.log(i+1+"문제 정답")
             }
         }
     })
-    var page = 0;
-    var total = $("#q li").length;
+    var page=0;
+    var total=$("#q li").length;
     $("#next").click(function(){
-        if(page < total-1) {
-        // console.log($("#q li:visible").length);
-        var page = $("#q li").index($("#q li:visible"));  // 현재문제
-        page++;
-        $("#q li:visible").hide();
-        $("#q li").eq(page).show();
+        if(page<total-1) {
+            page = $("#q li").index($("#q li:visible")); // 현재문제
+            page++;
+            $("#q li:visible").hide();
+            $("#q li").eq(page).show();
         } else {
-            alert("마지막 문제입니다.");
+            // 게임결과 페이지
         }
     })
 </script>

@@ -4,107 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-</head>
-<style>
-        * {margin:0; padding:0; list-style: none;}
-        h1 {padding:50px; text-align: center; padding: 50px;}
-        #stage {border:1px solid gray; width:300px; height: 300px; margin:50px auto; 
-            background: linear-gradient(90deg,#ccc 1px, transparent 1px) left/10px 10px, 
-            linear-gradient(180deg,#ccc 1px,transparent 1px)
-            top/10px 10px; position: relative; border-bottom:1px solid #ccc; border-right:1px solid #ccc;}
-        #stage>[id] {position: absolute; width:100%; height: 100%;}
-        #snake span {width:10px; height:10px; background: #333; position: absolute; left:50px; top:50px}
+    <style>
+        * {margin:0; padding:0; list-style:none;}
+        h1 {text-align: center; padding:50px}
+        #stage {width:400px; height:300px; margin:50px auto; background: linear-gradient(90deg, #ccc 1px, transparent 1px) left/10px 10px, linear-gradient(180deg, #ccc 1px, transparent 1px) top/10px 10px; position: relative; box-sizing: border-box; border-bottom:1px solid #ccc; border-right:1px solid #ccc;}
+        #stage>[id] {position: absolute; width:100%; height:100%;}
+        #snake span {width:10px; height:10px; background:#333; position: absolute; left:50px; top:50px}
         #snake span:last-child {box-shadow: 0 0 0 5px #333; border-radius: 50%;}
-        #snake span.last-child.left {rotate:180deg;} 
-        #snake span.last-child.right {rotate:0deg;} 
-        #snake span.last-child.top {rotate:-90deg;} 
-        #snake span.last-child.bottom {rotate:90deg;} 
-        #snake span:last-child::before,
-        #snake span:last-child::after {content:""; position: absolute; width:7px; height:7px; background:#fff;
-            border-radius: 50%; left:-4px; top:-4px; box-shadow: 0 0 0 3px #333}
+        #snake span:last-child.left {rotate:180deg;}
+        #snake span:last-child.right {rotate:0deg;}
+        #snake span:last-child.top {rotate:-90deg;}
+        #snake span:last-child.bottom {rotate:90deg;}
+        #snake span:last-child:before,
+        #snake span:last-child:after {content:""; position: absolute; width:7px; height:7px; background: #fff; border-radius: 50%; left:-4px; top:-4px; box-shadow:0 0 0 3px #333}
         #snake span:last-child:after {top:auto; bottom:-4px}
         #snake span:first-child,
-        #snake span:first-child.right {border-radius:10px 0 0 10px;}
-        #snake span:first-child.left {border-radius:0 10px 10px 0;}
-        #snake span:first-child.top {border-radius:10px 0 0 10px;}
-        #snake span:first-child.bottom {border-radius:10px 0 0 10px;}
-        #items span {font-size:14px; transform: translate(-4px,-5px); position:absolute;}
-</style>
+        #snake span:first-child.right {border-radius: 10px 0 0 10px;}
+        #snake span:first-child.left {border-radius: 0 10px 10px 0;}
+        #snake span:first-child.top {border-radius: 0 0 10px 10px;}
+        #snake span:first-child.bottom {border-radius:10px 10px 0 0;}
+        #items span {font-size:14px;  position: absolute;}
+    </style>
+</head>
 <body>
-<h1>Snake Game</h1> 
+<h1>Snake Game</h1>
 <section id="stage">
     <div id="snake">
-        <span class="tail"></span>
+        <span></span>
         <span style="left:60px;" class="right"></span>
         <span style="left:70px;" class="right"></span>
         <span style="left:80px;" class="right"></span>
     </div>
     <div id="items">
-        <span style="left:120px; top:200px">🌹</span>
+        <span style="left:120px; top:200px">🥩</span>
     </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    var dir="right";
+    var dir="right"; // 기본 방향
     var x,y;
-    setInterval(function() {
-    if (dir=="right") {
-        x = $("#snake span:last").position().left +10;
-        y = $("#snake span:last").position().top;
-        move();
-    } else if (dir=="bottom") {
-        x = $("#snake span:last").position().left;
-        y = $("#snake span:last").position().top +10;
-        move();
-    } else if (dir=="left") {
-        x = $("#snake span:last").position().left - 10;
-        y = $("#snake span:last").position().top;
-        move();
-    } else if (dir=="top") {
-        x = $("#snake span:last").position().left;
-        y = $("#snake span:last").position().top - 10;
-        move();
-    }
-    },200);
-
+    setInterval(function(){
+        if(dir=="right") {
+            x = $("#snake span:last").position().left+10;
+            y = $("#snake span:last").position().top;
+            move()
+        } else if(dir=="bottom") {
+            x = $("#snake span:last").position().left;
+            y = $("#snake span:last").position().top+10;
+            move();
+        } else if(dir=="left") {
+            x = $("#snake span:last").position().left-10;
+            y = $("#snake span:last").position().top;
+            move();
+        } else if(dir=="top") {
+            x = $("#snake span:last").position().left;
+            y = $("#snake span:last").position().top-10;
+            move();
+        } 
+    },200)
     function move() {
         $("#snake").append("<span></span>");
-        $("#snake").addClass(dir)
+        $("#snake span:last").addClass(dir);
         $("#snake span:last").css({left:x+"px", top:y+"px"});
-        
+
         // 아이템 먹을시 꼬리 늘어나기
-        if(x !=$("#items span").position().left || y != $("#items span").position().top) {
+        if(x!=$("#items span").position().left || y!=$("#items span").position().top) {
             $("#snake span:first").remove();
         }
-        $("#snake span:first").addClass($("#snake span").eq(1).attr("class"));
-        // 죽는 경우
-        // - 벽에 닿으면
-        // - 몸에 닿으면
-        var check1 = x < 0 || x > 390 || y < 0 || y > 290;
-        var check2 = $("#snake span:first");
+        $("#snake span:first").attr("class",$("#snake span").eq(1).attr("class"))
 
-        if (check1 || check2) {
+        // 죽는 경우?
+        // - 벽에 닿으면 (머리의 좌표가 스테이지 밖으로 나가면)
+        var check1 = x<0 || x > 390 || y<0 || y > 290;
+        console.log(check1)
+        // - 몸(span)에 닿으면 : #snake span과 머리가 닿으면
+        var check2 = ;
 
+        // 과제) 조건2 완성하기, 개인 웹게임 완성하기
+        if(check1 || check2) {
+            // 엔딩처리
+         alert("Game Over");
         }
-        if(x<0 || x>290 || y<0 || y>290 || $("#snake span:last").hasClass($("#snake span").eq(1).attr("class"))) {
-            console.log("Game Over!");
-            //clearInterval(interval);
-        }
-
     }
-
-    $(document).keydown(function(e) {
-        if (e.keyCode == 37) {  // 왼쪽키
+    $(document).keydown(function(e){
+        if(e.keyCode==37) { // 왼쪽키
             dir="left";
-        } else if (e.keyCode == 38) {  // 위
-            dir="top";
-        } else if (e.keyCode == 39) {  // 오른쪽
-            dir="right";
-        } else if (e.keyCode == 40) {  // 아래
-            dir="bottom";
+        } else if(e.keyCode==38) {  // 위
+            dir="top"
+        } else if(e.keyCode==39) {  // 오른쪽
+            dir="right"
+        } else if(e.keyCode==40) {  // 아래
+            dir="bottom"
         }
     })
-    
 </script>
 </body>
 </html>

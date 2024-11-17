@@ -7,12 +7,12 @@
     <style>
         * {margin:0; padding:0; list-style:none;}
         h1 {padding:50px; text-align: center;}
-        img{width:130px; height: 130px;}
-        #char {border:1px dashed gray; width:328px; height:328px; margin:50px auto; background:url(img/bg01.png) center/cover; position:relative;}
+        img {width:130px; height:130px;}
+        #char {border:1px dashed gray; width:328px; height:328px; margin:50px auto; background:url(img/bg01.png) center/cover; position: relative;}
         #char img {display: block; width:100%; height:auto;}
-        #char img.top {position: absolute; width: 159px; left: 50%;  top:120px; transform: translateX(-50%);}
-        #bt {display: flex; gap:10px; justify-content: center; margin-bottom: 20px;}
-        #bt li {padding:5px 10px; background: #ccc; color:#333; cursor:pointer;}
+        #char img.top {position: absolute; width:159px; left:50%;top:120px; transform: translateX(-50%);}
+        #bt {display: flex; gap:10px; justify-content: center; margin-bottom:20px;}
+        #bt li {padding:5px 10px; background:#ccc; color:#333; cursor: pointer;}
         #bt li.on {background:#333; color:#ccc}
         .pic {display: flex; justify-content: center; flex-wrap: wrap;}
         .pic:not(#top) {display: none;}
@@ -24,9 +24,8 @@
     <!-- <img src="img/bg01.png"> -->
     <div id="char">
         <img src="img/109_char.png">
-        <img src="img/top02.png" class="top">
     </div>
-
+    
     <ul id="bt">
         <li class="on">상의</li>
         <li>하의</li>
@@ -47,7 +46,6 @@
     </div>
 
     <div id="pants" class="pic">
-        <img src="img/109_none.png">
         <img src="img/pants01.png">
         <img src="img/pants02.png">
         <img src="img/pants03.png">
@@ -56,7 +54,6 @@
     </div>
 
     <div id="item1" class="pic">
-        <img src="img/109_none.png">
         <img src="img/item1_01.png">
         <img src="img/item1_02.png">
         <img src="img/item1_03.png" class="item1 item1-1">
@@ -68,7 +65,6 @@
     </div>
 
     <div id="item2" class="pic">
-        <img src="img/109_none.png">
         <img src="img/item2_01.png">
         <img src="img/item2_02.png">
         <img src="img/item2_03.png">
@@ -80,7 +76,6 @@
     </div>
 
     <div id="bg" class="pic">
-        <img src="img/109_none.png">
         <img src="img/bg01.png">
         <img src="img/bg02.png">
         <img src="img/bg03.png">
@@ -93,40 +88,41 @@
     </div>
     <button>나만의 백구 완성!</button>
 </section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     // 카테고리 기능
-    $("#bt li").click(function() {
-        var menu = $("#bt li").index($("this"));
-        //alert(menu);
+    $("#bt li").click(function(){
+        var menu = $("#bt li").index($(this));
+        // alert(menu);
         $(".pic").hide();
         $(".pic").eq(menu).css("display","flex");
         $(".on").removeClass("on");
         $(this).addClass("on");
     })
+
     // 아이템 적용
-    $(".pic img:not(:first-child)").click(function() {
+    $(".pic img:not(:first-child)").click(function(){
         var menu = $("#bt li").index($(".on"));
+        // alert(menu);
         var img=$(this).attr("src");
-        if (menu == 4) {
+
+        if(menu==4) {
             $("#char").css("background-image","url("+img+")");
-        } else if (menu==0){
+        } else if(menu==0) {
             $("#char .top").remove();
             $("#char").append($(this).clone());
-        } else if (menu==1){
+        } else if(menu==1) {
             $("#char .pants").remove();
             $("#char").append($(this).clone());
-        } else if (menu==2){
+        } else if(menu==2) {
             $("#char .item1").remove();
             $("#char").append($(this).clone());
-        } else if (menu==3){
+        } else if(menu==3) {
             $("#char .item2").remove();
             $("#char").append($(this).clone());
         }
-
-
     })
 </script>
 </body>
 </html>
-
